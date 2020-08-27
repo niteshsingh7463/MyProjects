@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>JS-AN-C2 Section_1</title>
+
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">MyFavPizza</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="vegPizza()" href="#">Veg Pizza <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="nonvegPizza()" href="#">Non-Veg Pizza <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="sideDishes()" href="#">Side Dishes <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="otherItems()" href="#">Other Items <span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <br>
+        <div id="show1"></div>
+    </div>
+</body>
+<script>
+    let sizes = ["Select Size", "Regular", "Medium", "Large"];
+    let crusts = ["Select Crust", "New Hand Tossed", "Wheat Thin Crust", "Cheese Burst", "Fresh Pan Pizza", "Classic Hand Tossed"];
+    let allFood = [{
+        "id": "MIR101",
+        "image": "https://i.ibb.co/SR1Jzpv/mirinda.png",
+        "type": "Beverage",
+        "name": "Mirinda",
+        "desc": "Mirinda",
+        "veg": "Yes"
+    }, {
+        "id": "PEP001",
+        "image": "https://i.ibb.co/3vkKqsF/pepsiblack.png",
+        "type": "Beverage",
+        "name": "Pepsi Black Can",
+        "desc": "Pepsi Black Can",
+        "veg": "Yes"
+    }, {
+        "id": "LIT281",
+        "image": "https://i.ibb.co/27PvTng/lit.png",
+        "type": "Beverage",
+        "name": "Lipton Iced Tea",
+        "desc": "Lipton Iced Tea",
+        "veg": "Yes"
+    }, {
+        "id": "PEP022",
+        "image": "https://i.ibb.co/1M9xDZB/pepsi-new-20190312.png",
+        "type": "Beverage",
+        "name": "Pepsi New",
+        "desc": "Pepsi New",
+        "veg": "Yes"
+    }, {
+        "id": "BPCNV1",
+        "image": "https://i.ibb.co/R0VSJjq/Burger-Pizza-Non-Veg-nvg.png",
+        "type": "Burger Pizza",
+        "name": "Classic Non Veg",
+        "desc": "Oven - baked buns with cheese, peri - peri chicken, tomato & capsicum in creamy mayo",
+        "veg": "No"
+    }, {
+        "id": "BPCV03",
+        "image": "https://i.ibb.co/Xtx43fT/Burger-Pizza-Veg-423-X420-Pixel-1.png",
+        "type": "Burger Pizza",
+        "name": "Classic Veg",
+        "desc": "Oven - baked buns with cheese, tomato & capsicum in creamy mayo",
+        "veg": "Yes"
+    }, {
+        "id": "BPPV04",
+        "image": "https://i.ibb.co/Xtx43fT/Burger-Pizza-Veg-423-X420-Pixel-1.png",
+        "type": "Burger Pizza",
+        "name": "Premium Veg",
+        "desc": "Oven - baked buns with cheese, paneer, tomato, capsicum & red paprika in creamy mayo",
+        "veg": "Yes"
+    }, {
+        "id": "DIP033",
+        "image": "https://i.ibb.co/0mbBzsw/new-cheesy.png",
+        "type": "Side Dish",
+        "name": "Cheesy Dip",
+        "desc": "An all - time favorite with your Garlic Breadsticks & Stuffed Garlic Bread for a Cheesy indulgence",
+        "veg": "Yes"
+    }, {
+        "id": "DIP072",
+        "image": "https://i.ibb.co/fY52zBw/new-jalapeno.png",
+        "type": "Side Dish",
+        "name": "Cheesy Jalapeno Dip",
+        "desc": "A spicy, tangy flavored cheese dip is a an absolutedelight with your favourite Garlic Breadsticks",
+        "veg": "Yes"
+    }, {
+        "id": "GAR952",
+        "image": "https://i.ibb.co/BNVmfY9/Garlic-bread.png",
+        "type": "Side Dish",
+        "name": "Garlic Breadsticks",
+        "desc": "Baked to perfection. Your perfect pizza partner!Tastesbest with dip",
+        "veg": "Yes"
+    }, {
+        "id": "PARCH1",
+        "image": "https://i.ibb.co/prBs3NJ/Parcel-Nonveg.png",
+        "type": "Side Dish",
+        "name": "Chicken Parcel",
+        "desc": "Snacky bites!Pizza rolls with chicken sausage & creamyharissa sauce",
+        "veg": "No"
+    }, {
+        "id": "PARVG7",
+        "image": "https://i.ibb.co/JHhrM7d/Parcel-Veg.png",
+        "type": "Side Dish",
+        "name": "VegParcel",
+        "desc": "Snacky bites!Pizza rolls with paneer & creamy harissa sauce",
+        "veg": "Yes"
+    }, {
+        "id": "PATNV7",
+        "image": "https://i.ibb.co/0m89Jw9/White-Pasta-Nvg.png",
+        "type": "Side Dish",
+        "name": "White Pasta Italiano Non-Veg",
+        "desc": "Creamy white pasta with pepper barbecue chicken",
+        "veg": "No"
+    }, {
+        "id": "PATVG4",
+        "image": "https://i.ibb.co/mv8RFbk/White-Pasta-Veg.png",
+        "type": "Side Dish",
+        "name": "White Pasta Italiano Veg",
+        "desc": "Creamy white pasta with herb grilled mushrooms",
+        "veg": "Yes"
+    }, {
+        "id": "DES044",
+        "image": "https://i.ibb.co/gvpDKPv/Butterscotch.png",
+        "type": "Dessert",
+        "name": "Butterscotch Mousse Cake",
+        "desc": "Sweet temptation!Butterscotch flavored mousse",
+        "veg": "Yes"
+    }, {
+        "id": "DES028",
+        "image": "https://i.ibb.co/nm96NZW/Choco-Lava.png",
+        "type": "Dessert",
+        "name": "Choco Lava Cake",
+        "desc": "Chocolate lovers delight!Indulgent,gooey molten lava inside chocolate cake",
+        "veg": "Yes"
+    }, {
+        "id": "PIZVDV",
+        "image": "https://i.ibb.co/F0H0SWG/deluxeveg.png",
+        "type": "Pizza",
+        "name": "Deluxe Veggie",
+        "desc": "Veg delight - onion, capsicum, grilled mushroom, corn & paneer",
+        "veg": "Yes"
+    }, {
+        "id": "PIZVFH",
+        "image": "https://i.ibb.co/4mHxB5x/farmhouse.png",
+        "type": "Pizza",
+        "name": "Farmhouse ",
+        "desc": "Delightful combination of onion, capsicum, tomato & grilled mushroom",
+        "veg": "Yes"
+    }, {
+        "id": "PIZVIT",
+        "image": "https://i.ibb.co/sRH7Qzf/Indian-Tandoori-Paneer.png",
+        "type": "Pizza",
+        "name": "Indi Tandoori Paneer",
+        "desc": "It is hot. It is spicy. It is oh-so-Indian. Tandoori paneer with capsicum, red paprika & mint mayo",
+        "veg": "Yes"
+    }, {
+        "id": "PIZVMG",
+        "image": "https://i.ibb.co/MGcHnDZ/mexgreen.png",
+        "type": "Pizza",
+        "name": "Mexican Green Wave",
+        "desc": "Mexican herbs sprinkled on onion, capsicum, tomato & jalapeno",
+        "veg": "Yes"
+    }, {
+        "id": "PIZVPP",
+        "image": "https://i.ibb.co/cb5vLX9/peppypaneer.png",
+        "type": "Pizza",
+        "name": "PeppyPaneer",
+        "desc": "Flavorful trio of juicy paneer, crisp capsicum with spicy red paprika",
+        "veg": "Yes"
+    }, {
+        "id": "PIZVVE",
+        "image": "https://i.ibb.co/gTy5DTK/vegextra.png",
+        "type": "Pizza",
+        "name": "VegExtravaganza",
+        "desc": "Black olives, capsicum, onion, grilled mushroom, corn, tomato, jalapeno & extra cheese",
+        "veg": "Yes"
+    }, {
+        "id": "PIZNCP",
+        "image": "https://i.ibb.co/b5qBJ9d/cheesepepperoni.png",
+        "type": "Pizza",
+        "name": "Chicken Pepperoni",
+        "desc": "A classic American taste!Relish the delectable flavor of Chicken Pepperoni, topped with extra cheese",
+        "veg": "No"
+    }, {
+        "id": "PIZNCD",
+        "image": "https://i.ibb.co/GFtkbB1/Chicken-Dominator10.png",
+        "type": "Pizza",
+        "name": "Chicken Dominator",
+        "desc": "Loaded with double pepperbarbecue chicken, peri - peri chicken,chicken tikka & grilled chicken rashers",
+        "veg": "No"
+    }, {
+        "id": "PIZNPB",
+        "image": "https://i.ibb.co/GxbtcLK/Pepper-Barbeque-Onion-C.png",
+        "type": "Pizza",
+        "name": "Pepper Barbecue & Onion",
+        "desc": "A classic favourite with pepperbarbeque chicken & onion",
+        "veg": "No"
+    }, {
+        "id": "PIZNIC",
+        "image": "https://i.ibb.co/6Z5wBqr/Indian-Tandoori-Chicken-Tikka.png",
+        "type": "Pizza",
+        "name": "Indi Chicken Tikka",
+        "desc": "The wholesome flavour of tandoorimasala with Chicken tikka, onion, red paprika & mint mayo",
+        "veg": "No"
+    }];
+    let vegPizzaArr = [];
+    let nonvegPizzaArr = [];
+    let sideDishesArr = [];
+    let otherItemsArr = [];
+    let showArrLength = null;
+    let cart = [];
+    let currArray = null;
+
+
+    //===========================================================Show()====================================================================
+    function show(arr) {
+        let str = "";
+        showArrLength = arr.length;
+        let str2 = arr.map(createElement).join(" ");
+        str += "<div class='row'><div class='col-8' >" + str2 + "</div><div class='col-4 text-center border' id='divCart'></div></div>"
+        let ele = document.getElementById("show1");
+        ele.innerHTML = str;
+    }
+
+    function createElement(n1, index) {
+        let row1 = "";
+        let row2 = "";
+        let index2 = allFood.findIndex(n => n == n1);
+        let index3 = cart.findIndex(n => n == n1);
+        if (index % 2 == 0) {
+            row1 += "<div class='row '>";
+        }
+        row2 += "<div class='col-6 border bg-light'>";
+        row2 += "<div class='row'><div class='col-12 text-center'><img src='" + n1.image + "' alt='Card image cap' style='width:100%;'></div></div>";
+        row2 += "<div class='row'><div class='col-12 text-center'><h5>" + n1.name + "</h5></div></div>";
+        row2 += "<div class='row '><div class='col-12 text-center'><p style='font-size:.8em'>" + n1.desc + "</p></div></div>";
+
+        if (n1.type == "Pizza") {
+            if (index3 != -1) {
+                row2 += "<div class='row' id='select'><div class='col-6 '><select  class='form-control text-left' disabled><option>" + n1.size + "</option></select></div><div class='col-6 '><select class='text-right form-control' disabled><option>" + n1.crust + "</option></select></div></div>";
+            } else {
+                row2 += "<div class='row' id='select'><div class='col-6 '><select id='size" + index + "' class='form-control text-left'>" + sizes.map(createOption).join(" ") + "</select></div><div class='col-6 '><select id='crusts" + index + "' class='text-right form-control'>" + crusts.map(createOption).join(" ") + "</select></div></div>";
+            }
+        }
+        if (index3 != -1) {
+            row2 += "<div class='row'><div class='col-12 text-center'><button class='btn btn-sm btn-success' onclick='increaseQuantity(" + index3 + ")'>+</button><button class='btn btn-sm btn-secondary' disabled>" + n1.quantity + "</button><button class='btn btn-sm btn-danger' onclick='decreaseQuantity(" + index3 + ")'>-</button></div></div>";
+        } else {
+            row2 += "<div class='row'><div class='col-12 text-center' id='divbtn" + index + "'><button class='btn btn-sm btn-primary' onclick='addToCart(" + index2 + "," + index + ")'>Add to cart</button></div></div>"
+        }
+        row2 += "</div>";
+
+
+
+
+        row1 += row2;
+        if (index % 2 == 1 || index == showArrLength - 1) {
+            row1 += "</div>";
+        }
+        return row1;
+
+    }
+
+    function createOption(data) {
+        return "<option>" + data + "</option>";
+    }
+    //===============================================================================================================================
+    function vegPizza() {
+        vegPizzaArr = allFood.filter(n1 => (n1.type == "Pizza" && n1.veg == "Yes"));
+        currArray = vegPizzaArr;
+        show(vegPizzaArr);
+        showCart();
+    }
+    //===============================================================================================================================
+    function nonvegPizza() {
+        nonvegPizzaArr = allFood.filter(n1 => (n1.type == "Pizza" && n1.veg == "No"));
+        currArray = nonvegPizzaArr;
+        show(nonvegPizzaArr);
+        showCart();
+    }
+    //===============================================================================================================================
+    function sideDishes() {
+        sideDishesArr = allFood.filter(n1 => (n1.type == "Side Dish"));
+        currArray = sideDishesArr;
+        show(sideDishesArr);
+        showCart();
+    }
+    //===============================================================================================================================
+    function otherItems() {
+        otherItemsArr = allFood.filter(n1 => (n1.type != "Pizza" && n1.type != "Side Dish"));
+        currArray = otherItemsArr;
+        show(otherItemsArr);
+        showCart();
+    }
+    //=========================================================Cart()======================================================================
+    function addToCart(objindex, selectindex) {
+        let obj = allFood[objindex];
+        if (obj.type == "Pizza") {
+            let sizeIndex = "size" + selectindex;
+            let crustIndex = "crusts" + selectindex;
+            // console.log(sizeIndex, crustIndex)
+
+            let size1 = document.getElementById(sizeIndex).value;
+            let crust1 = document.getElementById(crustIndex).value;
+            if (size1 == "Select Size") {
+                alert("Choose the Size before adding to cart ");
+
+            } else if (crust1 == "Select Crust") {
+                alert("Choose the Crust before adding to cart");
+
+            } else {
+                obj.size = size1;
+                obj.crust = crust1;
+                obj.quantity = 1;
+                cart.push(obj);
+                if (obj.type == "Pizza" && obj.veg == "Yes") {
+                    show(vegPizzaArr);
+                } else if (obj.type == "Pizza" && obj.veg == "No") {
+                    show(nonvegPizzaArr);
+                } else if (obj.type == "Side Dish") {
+                    show(sideDishesArr);
+                } else {
+                    show(otherItemsArr);
+                }
+                showCart();
+            }
+        } else {
+            obj.quantity = 1;
+            cart.push(obj);
+
+            if (obj.type == "Pizza" && obj.veg == "Yes") {
+                show(vegPizzaArr);
+            } else if (obj.type == "Pizza" && obj.veg == "No") {
+                show(nonvegPizzaArr);
+            } else if (obj.type == "Side Dish") {
+                show(sideDishesArr);
+            } else {
+                show(otherItemsArr);
+            }
+            showCart();
+        }
+
+    }
+
+    function showCart() {
+        let ele = document.getElementById("divCart");
+        let str = '';
+        if (cart.length == 0) {
+            ele.innerHTML = "<h4 class='bg-light'>Cart is empty</h4>";
+        } else {
+            let data = cart.map(createCartElement).join(" ");
+            ele.innerHTML = data;
+        }
+
+    }
+
+    function createCartElement(n1, index) {
+        let str = '';
+        let str2 = "";
+
+        str2 += "<div class='col-5' style='position:relative'><img style='max-width: 90%;position:absolute;top:0;bottom:0;left:0;right:0;margin:auto;'  src='" + n1.image + "'></div>";
+
+        str2 += "<div class='col-7 text-left'>";
+        str2 += "<div class='row'><div class='col-12'>" + n1.name + "</div></div>";
+        str2 += "<div class='row'><div class='col-12' ><p style='font-size:.8em'>" + n1.desc + "</p></div></div>";
+        if (n1.type == "Pizza") {
+            str2 += "<div class='row'><div class='col-12'>" + n1.size + "|" + n1.crust + "</div></div>";
+        }
+        str2 += "<div class='row'><div class='col-12'><button class='btn btn-sm btn-success' onclick='increaseQuantity(" + index + ")'>+</button><button class='btn btn-sm btn-secondary' disabled>" + n1.quantity + "</button><button class='btn btn-sm btn-danger' onclick='decreaseQuantity(" + index + ")'>-</button></div></div>";
+        str2 += "</div>";
+        str += "<div class='row border'>" + str2 + "</div>";
+        return str;
+    }
+    //===============================================================================================================================
+    function increaseQuantity(i) {
+        let obj = cart[i];
+        obj.quantity += 1;
+        show(currArray);
+        showCart();
+
+    }
+
+    function decreaseQuantity(i) {
+        let obj = cart[i];
+        obj.quantity -= 1;
+        if (obj.quantity == 0) {
+            cart.splice(i, 1);
+        }
+        show(currArray);
+        showCart();
+
+    }
+    //===============================================================================================================================
+    //===============================================================================================================================
+</script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</html>

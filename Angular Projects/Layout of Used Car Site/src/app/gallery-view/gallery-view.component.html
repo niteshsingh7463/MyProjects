@@ -1,0 +1,26 @@
+<div class="row border m-2" *ngFor="let item of carData" (click)="showDetails(item.id)">
+    <div class="col-2"></div>
+    <img class="col-8 p-3" src="{{ item.image }}" alt="" />
+    <div class="col-12 p-2">
+        <div class="row">
+            <div class="col-9">
+                <div class="card-text h4 mb-2">₹{{ item.price }}</div>
+            </div>
+            <div class="col-3 h6 text-right">
+                <i class="fa fa-share-alt fa-lg mr-2" aria-hidden="true"></i>
+                <i class="fa fa-heart ml-2 fa-lg"></i>
+            </div>
+        </div>
+
+        <div class="h6">{{ item.year }} - {{ item.miles }} km</div>
+        <div class="h6">
+            {{ item.make }} {{ item.model }}, {{ item.year }}, {{ item.fuel }}
+        </div>
+        <div class="row">
+            <div class="col-9">
+                <div class="card-text h6">{{ item.location }}, {{ item.city }}</div>
+            </div>
+            <div class="col-3 h6 text-right">{{ item.postedOn }}</div>
+        </div>
+    </div>
+</div>

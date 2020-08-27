@@ -1,0 +1,118 @@
+<div class="container">
+    <!-- -----------------Nav---------------- -->
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+        <h3 href="#" class="text-white">MyMessages</h3>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+                <li class="navbar-item">
+                    <!-- ------------Search--------------- -->
+                    <input type="text" [(ngModel)]="searchText" (keydown.enter)="handle()" class="form-control" placeholder="Search" style="width: 300%;" />
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ----------------Del------------------ -->
+    <div *ngIf="delBool" class="row">
+        <div class="col-2"></div>
+        <div class="col-2">
+            <button class="btn btn-primary btn-small" (click)="del()">Delete</button>
+        </div>
+        <div class="col-2">
+            <select name="" id="" [(ngModel)]="moveSelValue" (change)="move()">
+        <option value="null">Move To</option>
+        <option value="{{ item }}" *ngFor="let item of moveArr">{{
+          item
+        }}</option>
+      </select>
+        </div>
+    </div>
+
+    <!-- ---------------------------------- -->
+    <div class="col-4"></div>
+    <div class="row">
+        <div class="col-2">
+            <button class="btn btn-primary" (click)="btnCompose()">Compose</button>
+            <div (click)="displayMsg(1)" class="cur {{ cls1 }}">
+                Inbox({{ Inbox.length }})
+            </div>
+            <div (click)="displayMsg(2)" class="cur {{ cls2 }}">
+                Sent({{ Sent.length }})
+            </div>
+            <div (click)="displayMsg(3)" class="cur {{ cls3 }}">
+                Drafts({{ Drafts.length }})
+            </div>
+            <div (click)="displayMsg(4)" class="cur {{ cls4 }}">
+                Work({{ Work.length }})
+            </div>
+            <div (click)="displayMsg(5)" class="cur {{ cls5 }}">
+                Social({{ Social.length }})
+            </div>
+        </div>
+        <div *ngIf="!composeFormBool && !msgBool" class="col-10">
+            <span *ngIf="currDisplayArr.length > 0 && !delBool">
+        Showing messages 1-{{ currDisplayArr.length }} of
+        {{ currDisplayArr.length }}</span
+      >
+      <span *ngIf="currDisplayArr.length == 0 && !delBool">
+        There are NO messages
+      </span>
+            <div class="row bg-light border-bottom" *ngFor="let item of currDisplayArr">
+                <div class="col-1">
+                    <input type="checkbox" (change)="showDel()" [(ngModel)]="item.selected" class="form-input" name="" id="" />
+                </div>
+                <div class="col-3" (click)="showMsg(item)" *ngIf="item.from != 'jack@test.com'">
+                    {{ item.from }}
+                </div>
+                <div class="col-3" (click)="showMsg(item)" *ngIf="item.from == 'jack@test.com'">
+                    me
+                </div>
+                <div (click)="showMsg(item)" class="col-4" style="
+            overflow: hidden;
+            white-space: nowrap;
+            height: 25px;
+            text-overflow: ellipsis;
+          ">
+                    {{ item.subject }}
+                </div>
+                <div class="col-4" (click)="showMsg(item)" style="
+            overflow: hidden;
+            white-space: nowrap;
+            height: 25px;
+            text-overflow: ellipsis;
+          ">
+                    {{ item.text }}
+                </div>
+            </div>
+        </div>
+        <div *ngIf="msgBool" class="col-10 border">
+            <br />
+            <div class="row">
+                <div class="col-2">
+                    From <br /> To <br /> Subject <br />
+                </div>
+                <div class="col-10">
+                    {{ msg.from }} <br /> {{ msg.to }} <br /> {{ msg.subject }} <br />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2">
+                    Message
+                </div>
+                <div class="col-10">
+                    <div *ngFor="let item of msg.text.split('\n')">{{ item }} <br /></div>
+                </div>
+                <div class="row">
+                    <div class="col-2">
+                        <button class="btn btn-secondary m-2" (click)="reply(msg)">
+              Reply
+            </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="composeFormBool" class="col-10">
+            <app-compose (sentArr)="composedSendEvent($event)" [to]="to" [subject]="subject"></app-compose>
+        </div>
+    </div>
+</div>

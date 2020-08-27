@@ -1,0 +1,9 @@
+<div class="row">
+    <div class="col-3">
+        <app-left-panel [language]="languageOptStructure" [filter]="filterOptStructure" (radioChange)="radioChangeFun()"></app-left-panel>
+    </div>
+    <div class="col-9">
+        <h2 class="text-warning ml-5">All Books</h2>
+        <app-right-panel [allData]="allData" [prevBool]="prevBool" [startIndex]="startIndex" [endIndex]="endIndex" [maxResults]="maxResults" (pageFunEvent)="pageFun($event)"></app-right-panel>
+    </div>
+</div>

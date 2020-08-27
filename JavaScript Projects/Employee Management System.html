@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        .headercell1 {
+            display: inline-block;
+            color: white;
+            text-align: center;
+            background-color: black;
+            width: 10%;
+            margin: 1px;
+        }
+        
+        label {
+            float: right;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        /* Create two equal columns that floats next to each other */
+        
+        .row {
+            padding: 2px;
+        }
+        
+        .column {
+            float: left;
+            width: 20%;
+            /* padding: 5px; */
+            height: 20px;
+            /* Should be removed. Only for demonstration */
+        }
+        /* Clear floats after the columns */
+        
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        
+        .headercell2 {
+            display: inline-block;
+            color: white;
+            background-color: black;
+            width: 14%;
+            text-align: center;
+            margin: 1px;
+        }
+        
+        #blank {
+            display: inline-block;
+            text-align: center;
+            color: blank;
+            background-color: black;
+            width: 10%;
+            margin: 1px;
+        }
+        
+        .cell1 {
+            display: inline-block;
+            color: black;
+            margin: 1px;
+            background-color: lightgrey;
+            width: 10%;
+            text-align: center;
+        }
+        
+        .cell2 {
+            display: inline-block;
+            color: black;
+            background-color: lightgray;
+            width: 14%;
+            margin: 1px;
+            text-align: center;
+        }
+        
+        button {
+            background-color: black;
+            color: white;
+            height: 20px;
+            border-radius: 2px;
+        }
+        
+        button:hover {
+            background-color: red;
+        }
+        
+        select {
+            border-radius: 5px;
+            /* margin: 2px; */
+            background-color: lightgray;
+        }
+        
+        form {
+            text-align: center;
+        }
+        
+        .fulldump {
+            width: 518px;
+            height: auto;
+            border: 1px solid black;
+            word-wrap: break-word;
+        }
+        
+        .partdump {
+            width: 518px;
+            height: auto;
+            border: 1px solid black;
+            word-wrap: break-word;
+        }
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+    <button onclick="newemp()">New Employee</button>
+    <button onclick="showTable(allEmployee)">All Employee</button>
+    <button onclick="fulldump1()">Full Dump</button>
+    <Button onclick="partdump1()">Partial Dump</Button>
+
+    <div id="table"></div>
+</body>
+<script>
+    function fulldump1() {
+        let str10 = "";
+        let arr9 = allEmployee.map(n1 => [n1.empcode, n1.name, n1.age, n1.gender, n1.department, n1.designation, n1.salary].join("::"));
+
+        document.getElementById("table").innerHTML = "<div class='fulldump'>" + JSON.stringify(arr9) + "</div>";
+
+    }
+
+
+
+    function partdump1() {
+        let arr9 = allEmployee.map(n1 => ['Code=', n1.empcode, ',Name=',
+            n1.name, ',Age=', n1.age
+        ].join(""));
+        document.getElementById("table").innerHTML = "<div class='partdump'>" + JSON.stringify(arr9) + "</div>";
+        // console.log(JSON.stringify(arr9).length)
+    }
+
+    let departments = ["Finance", "Technology", "Marketing", "Operations"];
+    let designations = ["Trainee", "Manager", "Vice-President", "President"];
+    let allEmployee = [{
+            empcode: 'A102',
+            name: 'James',
+            age: 37,
+            gender: 'Male',
+            department: 'Finance',
+            designation: 'Manager',
+            salary: 65000
+        }, {
+            empcode: 'A106',
+            name: 'Mary',
+            age: 24,
+            gender: 'Female',
+            department: 'Technology',
+            designation: 'Vice-President',
+            salary: 68000
+        }, {
+            empcode: 'A122',
+            name: 'Bob',
+            age: 23,
+            gender: 'Male',
+            department: 'Marketing',
+            designation: 'Manager',
+            salary: 51000
+        }, {
+            empcode: 'A088',
+            name: 'Julia',
+            age: 33,
+            gender: 'Female',
+            department: 'Finance',
+            designation: 'Vice-President',
+            salary: 70000
+        }, {
+            empcode: 'A055',
+            name: 'Steve',
+            age: 27,
+            gender: 'Male',
+            department: 'Technology',
+            designation: 'Manager',
+            salary: 53000
+        }, {
+            empcode: 'A208',
+            name: 'Katherine',
+            age: 29,
+            gender: 'Female',
+            department: 'Marketing',
+            designation: 'Manager',
+            salary: 61000
+        }, {
+            empcode: 'A181',
+            name: 'Edwards',
+            age: 31,
+            gender: 'Male',
+            department: 'Finance',
+            designation: 'Trainee',
+            salary: 49000
+        }, {
+            empcode: 'A029',
+            name: 'Margaret',
+            age: 32,
+            gender: 'Female',
+            department: 'Technology',
+            designation: 'President',
+            salary: 53000
+        }, {
+            empcode: 'A029',
+            name: 'Bill',
+            age: 27,
+            gender: 'Male',
+            department: 'Operations',
+            designation: 'Manager',
+            salary: 58000
+        }
+
+    ];
+    //==========================================================================
+    // showTable(allEmployee);
+
+    function showTable(arr1) {
+
+        let p1 = "<option disabled selected>Choose Department</option>";
+        let p2 = "<option disabled selected>Choose Designations</option>";
+        let chooseDepartment = "";
+        let chooseDesigation = "";
+        for (let i = 0; i < departments.length; i++) {
+            p1 += "<option>" + departments[i] + "</option>";
+
+        }
+        chooseDepartment += "<select id='selectdepartment'>" + p1 + "</select>";
+
+        for (let i = 0; i < designations.length; i++) {
+            p2 += "<option>" + designations[i] + "</option>";
+
+        }
+        chooseDesigation += "<select id='selectdesignation'>" + p2 + "</select>";
+
+        let str = "<div>Filter Employees by " + chooseDepartment + chooseDesigation + "<button onclick='filtered1()'>Filter</button>" + "</div>";
+
+
+        let head1 = "<div class='headercell1'>Emp Code</div>";
+        let head2 = "<div class='headercell2'>Name</div>";
+
+        let head3 = "<div class='headercell1'>Age</div>";
+        let head4 = "<div class='headercell1'>Gender</div>";
+        let head5 = "<div class='headercell2'>Department</div>";
+        let head6 = "<div class='headercell2'>Desigation</div>";
+        let head7 = "<div class='headercell2'>Salary</div>";
+        let head8 = "<div id='blank'>blank</div>";
+        let headRow = "<div>" + head1 + head2 + head3 + head4 + head5 + head6 + head7 + head8 + "</div>";
+        str += headRow;
+        for (let i = 0; i < arr1.length; i++) {
+
+            let head5 = "<div class='cell1'>" + arr1[i].department + "</div>";
+            let head6 = "<div class='cell2'>" + arr1[i].designation + "</div>";
+
+            let head1 = "<div class='cell1'>" + arr1[i].empcode + "</div>";
+            let head2 = "<div class='cell1'>" + arr1[i].name + "</div>";
+            let head3 = "<div class='cell2'>" + arr1[i].age + "</div>";
+            let head4 = "<div class='cell2'>" + arr1[i].gender + "</div>";
+            let head7 = "<div class='cell2'>" + arr1[i].salary + "</div>";
+            let head8 = "<div class='cell1'><button onclick=edit1('" + arr1[i].empcode + "')>Edit</button></div>";
+            let headRow = "<div>" + head1 + head2 + head3 + head4 + head5 + head6 + head7 + head8 + "</div>";
+            str += headRow;
+        }
+
+        document.getElementById("table").innerHTML = str;
+    }
+
+    //-----------------------------------------------------------------------------------------------------------------
+
+    function filtered1() {
+
+        let selected1 = document.getElementById("selectdepartment");
+        let selected2 = document.getElementById("selectdesignation");
+        console.log(selected1.value, selected2.value)
+        if (selected1.value == "Choose Department" && selected2.value == "Choose Designations") {
+            console.log("1");
+            showTable(allEmployee);
+        } else if (selected1.value != "Choose Department" && selected2.value == "Choose Designations") {
+            let arr5 = allEmployee.filter(n1 => n1.department == selected1.value);
+            showTable(arr5);
+        } else if (selected1.value == "Choose Department" && selected2.value != "Choose Designations") {
+            let arr5 = allEmployee.filter(n1 => n1.designation == selected2.value);
+            showTable(arr5);
+        } else if (selected1.value != "Choose Department" && selected2.value != "Choose Designations") {
+            let arr5 = allEmployee.filter(n1 => n1.designation == selected2.value && n1.department == selected1.value);
+            showTable(arr5);
+        }
+
+    }
+
+    function newform() {
+
+
+        let p1 = "<option disabled selected>Choose Department</option>";
+        let p2 = "<option disabled selected>Choose Designations</option>";
+        let chooseDepartment = "";
+        let chooseDesigation = "";
+        for (let i = 0; i < departments.length; i++) {
+            p1 += "<option>" + departments[i] + "</option>";
+
+        }
+        chooseDepartment += "<select id='selectdepartment'>" + p1 + "</select>";
+
+        for (let i = 0; i < designations.length; i++) {
+            p2 += "<option>" + designations[i] + "</option>";
+
+        }
+        chooseDesigation += "<select id='selectdesignation'>" + p2 + "</select>";
+
+
+        let t1 = "<div class='row'><div class='column'><label for='emp1'>Employee Code</label></div><div class='column'><input type='text' id='emp1' ></div></div>";
+        let t2 = "<div class='row'><div class='column'><label for='name1'>Name</label></div><div class='column'><input type='text' id='name1'></div></div>";
+        let t3 = "<div class='row'><div class='column'><label for='age1'>Age</label></div><div class='column'><input type='number' id='age1'></div></div>";
+        let t4 = "<div class='row'><div class='column'><label for='male1'>Gender</label></div><div class='column'><input type='radio' name='gender' id='male1'>Male<input type='radio' name='gender' id='female1'>Female</div></div>";
+        let t5 = "<div class='row'><div class='column'><label for='selectdepartment'>Department</label></div><div class='column'>" + chooseDepartment + "</div></div>";
+        let t6 = "<div class='row'><div class='column'><label for='selectdesignation'>Designation</label></div><div class='column'>" + chooseDesigation + "</div></div>";
+        let t7 = "<div class='row'><div class='column'><label for='salary1'>Salary<label></div><div class='column'><input type='text' id='salary1'></div></div>";
+        let t8 = "<div class='row'><div class='column'></div><div class='column'><button id='btn' onclick='addNewEmp()'>" + "Add New Employee" + "</button></div></div>";
+        let str5 = t1 + t2 + t3 + t4 + t5 + t6 + t7 + t8;
+        document.getElementById("table").innerHTML = str5;
+    }
+
+    function newemp() {
+        newform();
+    }
+
+    function addNewEmp() {
+        let empCode1 = document.getElementById("emp1").value;
+        let name1 = document.getElementById("name1").value;
+        let age1 = document.getElementById("age1").value;
+        let gender1 = document.getElementsByName("gender");
+        let department1 = document.getElementById("selectdepartment").value;
+        let designation1 = document.getElementById("selectdesignation").value;
+        let salary1 = document.getElementById("salary1").value;
+
+        // console.log("gender", gender1[0].checked);
+        if (empCode1 == "")
+            alert("Enter the employee code");
+        else if (allEmployee.find(n1 => n1.empcode == empCode1) != undefined)
+            alert("Employee code already exists.Enter a different employee code");
+        else if (name1 == "")
+            alert("Enter the name");
+        else if (age1 == "")
+            alert("Enter the age");
+        else if (gender1[0].checked == false && gender1[1].checked == false)
+            alert("Select the gender");
+        else if (department1 == "")
+            alert("Select the department");
+        else if (designation1 == "")
+            alert("Select the designation");
+        else if (salary1 == "")
+            alert("Enter the salary");
+        else {
+            let gender2 = null;
+            if (gender1[0].checked == true)
+                gender2 = "Male";
+            else if (gender1[1].checked == true)
+                gender2 = "Female";
+            let v10 = {
+                empcode: empCode1,
+                name: name1,
+                age: age1,
+                gender: gender2,
+                department: department1,
+                designation: designation1,
+                salary: salary1
+            };
+            allEmployee.push(v10);
+            alert("The new employee has been successfully added");
+            showTable(allEmployee);
+        }
+
+    }
+
+    function edit1(empcode10) {
+        newform();
+        let p1 = allEmployee.find(n1 => n1.empcode == empcode10);
+        document.getElementById("emp1").value = empcode10;
+        document.getElementById("emp1").disabled = true;
+        document.getElementById("name1").value = p1.name;
+        document.getElementById("age1").value = p1.age;
+        if (p1.gender == "Male") {
+            document.getElementsByName("gender")[0].checked = true;
+        } else {
+            document.getElementsByName("gender")[1].checked = true;
+        }
+
+        document.getElementById("selectdepartment").value = p1.department;
+        document.getElementById("selectdesignation").value = p1.designation;
+        document.getElementById("salary1").value = p1.salary;
+        document.getElementById("btn").setAttribute("onclick", "update10('" + empcode10 + "')");
+        document.getElementById("btn").innerText = "Edit Employee Details";
+
+
+    }
+
+    function update10(empcode10) {
+        let index = allEmployee.findIndex(n1 => n1.empcode == empcode10);
+
+        let empCode1 = document.getElementById("emp1").value;
+        let name1 = document.getElementById("name1").value;
+        let age1 = document.getElementById("age1").value;
+        let gender1 = document.getElementsByName("gender");
+        let department1 = document.getElementById("selectdepartment").value;
+        let designation1 = document.getElementById("selectdesignation").value;
+        let salary1 = document.getElementById("salary1").value;
+
+
+        if (name1 == "")
+            alert("Enter the name");
+        else if (age1 == "")
+            alert("Enter the age");
+        else if (gender1[0].checked == false && gender1[1].checked == false)
+            alert("Select the gender");
+        else if (department1 == "")
+            alert("Select the department");
+        else if (designation1 == "")
+            alert("Select the designation");
+        else if (salary1 == "")
+            alert("Enter the salary");
+        else {
+            let gender2 = null;
+            if (gender1[0].checked == true)
+                gender2 = "Male";
+            else if (gender1[1].checked == true)
+                gender2 = "Female";
+            let v10 = {
+                empcode: empCode1,
+                name: name1,
+                age: age1,
+                gender: gender2,
+                department: department1,
+                designation: designation1,
+                salary: salary1
+            };
+            allEmployee[index] = v10;
+            alert("The employee details have been updated");
+            showTable(allEmployee);
+        }
+
+    }
+</script>
+
+</html>

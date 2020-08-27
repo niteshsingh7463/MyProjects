@@ -1,0 +1,9 @@
+<div class="container-fluid">
+    <label for="">To</label>
+    <input type="text" [(ngModel)]="to" class="form-control" name="" id="" />
+    <label for="">Subject</label>
+    <input type="text" [(ngModel)]="subject" class="form-control" name="" id="" />
+    <label for="">Message</label>
+    <textarea class="form-control" [(ngModel)]="msg" name="" id="" rows="3"></textarea>
+    <button class="btn btn-primary mt-3" (click)="sendComposed()">Send</button>
+</div>

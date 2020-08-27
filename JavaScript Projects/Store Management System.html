@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="Section-C.css"> -->
+    <style>
+        .btnblack {
+            border-radius: 2px;
+            color: white;
+            background-color: black;
+            margin: 1px;
+        }
+        
+        .btnblack:hover {
+            background-color: red;
+        }
+        
+        .head1 {
+            display: inline-block;
+            color: white;
+            background-color: rgb(17, 131, 184);
+            width: 95px;
+            text-align: center;
+        }
+        
+        .headblank {
+            display: inline-block;
+            color: rgb(17, 131, 184);
+            background-color: rgb(17, 131, 184);
+            width: 95px;
+            text-align: center;
+        }
+        
+        .cell0 {
+            display: inline-block;
+            color: black;
+            background-color: lightgreen;
+            width: 95px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .cell1 {
+            display: inline-block;
+            color: black;
+            background-color: lightpink;
+            width: 95px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        label {
+            float: right;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        /* Create two equal columns that floats next to each other */
+        
+        .row {
+            padding: 2px;
+        }
+        
+        .column {
+            float: left;
+            width: 15%;
+            /* padding: 5px; */
+            height: 20px;
+            /* Should be removed. Only for demonstration */
+        }
+        
+        .column2 {
+            float: left;
+            width: 25%;
+            /* padding: 5px; */
+            height: 20px;
+            /* Should be removed. Only for demonstration */
+        }
+        /* Clear floats after the columns */
+        
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>Store Management System</h2><br>
+    <button onclick="toshowProducts()" class="btnblack">Products</button>
+    <button class="btnblack" onclick="orderForm()">Enter an order</button>
+    <button onclick="showallorders()" class="btnblack">All Orders</button><br>
+    <div id="table"></div>
+</body>
+<script>
+    let Products = [{
+        "prodcode": "PEP122",
+        "prodname": "Pepsi",
+        "price": 12,
+        "category": "Food",
+        "offer": "10%"
+    }, {
+        "prodcode": "COK238",
+        "prodname": "Coke",
+        "price": 15,
+        "category": "Food",
+        "offer": "15%"
+    }, {
+        "prodcode": "MIR411",
+        "prodname": "Mirinda",
+        "price": 30,
+        "category": "Food",
+        "offer": "20%"
+    }, {
+        "prodcode": "RB0277",
+        "prodname": "Red Bull",
+        "price": 80,
+        "category": "Food",
+        "offer": "None"
+    }, {
+        "prodcode": "LUX831",
+        "prodname": "Lux",
+        "price": 10,
+        "category": "Soap",
+        "offer": "15%"
+    }, {
+        "prodcode": "DOV672",
+        "prodname": "Dove",
+        "price": 25,
+        "category": "Soap",
+        "offer": "20%"
+    }, {
+        "prodcode": "DET810",
+        "prodname": "Dettol",
+        "price": 15,
+        "category": "Soap",
+        "offer": "None"
+    }, {
+        "prodcode": "PAN590",
+        "prodname": "Pantene",
+        "price": 60,
+        "category": "Shampoo",
+        "offer": "None"
+    }, {
+        "prodcode": "SUN677",
+        "prodname": "Sunsilk",
+        "price": 48,
+        "category": "Shampoo",
+        "offer": "15%"
+    }, {
+        "prodcode": "GAR004",
+        "prodname": "Garnier",
+        "price": 75,
+        "category": "Shampoo",
+        "offer": "10%"
+    }];
+
+    let Orders = [{
+        "custname": "Jack Smith",
+        "mobile": "425361434",
+        "location": "Sector	14",
+        "slot": "12PM-2PM",
+        "value": 72.6,
+        "items": [{
+            "prodcode": "PEP122",
+            "quantity": 2
+        }, {
+            "prodcode": "COK238",
+            "quantity": 4
+        }]
+    }, {
+        "custname": "Mary Gomes",
+        "mobile": "723476123",
+        "location": "Sector	22",
+        "slot": "4PM-6PM",
+        "value": 130.60,
+        "items": [{
+            "prodcode": "SUN677",
+            "quantity": 2
+        }, {
+            "prodcode": "LUX831",
+            "quantity": 4
+        }, {
+            "prodcode": "DET810",
+            "quantity": 1
+        }]
+    }, {
+        "custname": "Tim May",
+        "mobile": "835099614",
+        "location": "Pioneer Chowk",
+        "slot": "Before	10 AM",
+        "value": 705,
+        "items": [{
+            "prodcode": "GAR004",
+            "quantity": 6
+        }, {
+            "prodcode": "RB0277",
+            "quantity": 3
+        }, {
+            "prodcode": "MIR411",
+            "quantity": 2
+        }]
+    }];
+
+    let Locations = ['Sector 14A', 'Sector 15B', 'Sector 22', 'Pioneer Chowk'];
+    let DeliverySlots = ['Before 10AM', '10AM-12PM', '12PM-2PM', '2PM-4PM', '4PM-6PM', 'After 6PM'];
+    let cartItem = [];
+    //========================================================================================
+    function toshowProducts() {
+        showProducts();
+    };
+
+    function showProducts() {
+
+        let str = "";
+        let str1 = "";
+        let str2 = "";
+        let propsofproducts = ["prodcode", "prodname", "price", "category", "offer"];
+        let headerarr = ['Code', "Name", 'Price', 'Category', 'Discount'];
+
+        for (let i = 0; i < headerarr.length; i++) {
+            str1 += "<div class='head1'>" + headerarr[i] + "</div>";
+        }
+        str += "<div>" + str1 + "</div>";
+
+        for (let i = 0; i < Products.length; i++) {
+            let cls = null;
+            if (i % 2 == 0) {
+                cls = "cell0";
+            } else {
+                cls = "cell1";
+            }
+            let p1 = "<div class='" + cls + "'>" + Products[i].prodcode + "</div>";
+            let p2 = "<div class='" + cls + "'>" + Products[i].prodname + "</div>";
+            let p3 = "<div class='" + cls + "'>" + Products[i].price + "</div>";
+            let p4 = "<div class='" + cls + "'>" + Products[i].category + "</div>";
+            let p5 = "<div class='" + cls + "'>" + Products[i].offer + "</div>";
+            let row = "<div>" + p1 + p2 + p3 + p4 + p5 + "</div>";
+            str += row;
+        }
+
+
+        document.getElementById("table").innerHTML = str;
+    }
+
+    //=========================================================================================
+
+    function showallorders() {
+
+        let str = "";
+
+        let str2 = "";
+        let headerarr = ['Code', "Name", 'Price', 'Quantity', 'Discount', 'Net Amount'];
+
+
+
+        for (let j = 0; j < Orders.length; j++) {
+            let str1 = "";
+            for (let i = 0; i < headerarr.length; i++) {
+                str1 += "<div class='head1'>" + headerarr[i] + "</div>";
+            }
+            str += tostringify(j);
+            str += "<div>" + str1 + "</div>";
+
+            for (let i = 0; i < Orders[j].items.length; i++) {
+                let obj1 = Orders[j];
+                let obj2 = Products.find(n1 => obj1.items[i].prodcode == n1.prodcode);
+
+                let cls = "cell0";
+                let netAmount = 0;
+                if (obj2.offer == "None") {
+                    netAmount = obj2.price * obj1.items[i].quantity;
+                } else {
+                    netAmount = (obj2.price * obj1.items[i].quantity) - (obj2.price * obj1.items[i].quantity) * (+obj2.offer.slice(0, 2) / 100);
+                }
+                let p1 = "<div class='" + cls + "'>" + obj2.prodcode + "</div>";
+                let p2 = "<div class='" + cls + "'>" + obj2.prodname + "</div>";
+                let p3 = "<div class='" + cls + "'>" + obj2.price + "</div>";
+                let p4 = "<div class='" + cls + "'>" + obj1.items[i].quantity + "</div>";
+                let p5 = "<div class='" + cls + "'>" + obj2.offer + "</div>";
+                let p6 = "<div class='" + cls + "'>" + netAmount + "</div>";
+                let row = "<div>" + p1 + p2 + p3 + p4 + p5 + p6 + "</div>";
+                str += row;
+            }
+            str += "<br>";
+        }
+        document.getElementById("table").innerHTML = str;
+
+    }
+
+    function tostringify(id) {
+        let obj1 = Orders[id];
+        let obj2 = Products.find(n1 => obj1.id == n1.id);
+        let resultstr = "<div class='div1'>" +
+            "<div class='div2'>Customer Name : " + obj1.custname + ",Mobile : " + obj1.mobile + ",Location : " + obj1.location + ",Delivery Slot : " + obj1.slot + "</div><div> <div class='div2' > Order Value: " + obj1.value + ",Number of items: " + obj1.items.reduce((acc, curr) => (acc + curr.quantity), 0) + " </div></div>";
+        return resultstr;
+
+    }
+
+    //=============================================================================================
+    function orderForm() {
+
+
+
+        let p1 = "<option disabled selected>Choose Location</option>";
+        let p2 = "<option disabled selected>Choose Delivery Slot</option>";
+        let p3 = "<option disabled selected>Select Product </option>";
+        let p4 = "<option disabled selected>Select quantity </option>";
+        let chooseLocation = "";
+        let chooseDeliverySlots = "";
+        let chooseProduct = "";
+        let chooseQuantity = "";
+        for (let i = 0; i < Locations.length; i++) {
+            p1 += "<option>" + Locations[i] + "</option>";
+
+        }
+        chooseLocation += "<select id='selectlocation'>" + p1 + "</select>";
+
+        for (let i = 0; i < DeliverySlots.length; i++) {
+            p2 += "<option>" + DeliverySlots[i] + "</option>";
+
+        }
+        chooseDeliverySlots += "<select id='selectDeliverySlots'>" + p2 + "</select>";
+
+
+        for (let i = 0; i < Products.length; i++) {
+            p3 += "<option>" + Products[i].prodcode + "</option>";
+
+        }
+        chooseProduct += "<select id='selectProduct'>" + p3 + "</select>";
+
+        for (let i = 1; i <= 6; i++) {
+            p4 += "<option>" + i + "</option>";
+
+        }
+        chooseQuantity += "<select id='selectQuantity'>" + p4 + "</select>";
+
+
+        let t1 = "<div class='row'><div class='column'><label for='CustomerName'>Customer Name</label></div><div class='column'><input type='text' id='CustomerName' ></div></div>";
+        let t2 = "<div class='row'><div class='column'><label for='MobileNumber'>Mobile Number</label></div><div class='column'><input type='text' id='MobileNumber'></div></div>";
+        let t3 = "<div class='row'><div class='column'><label for='selectlocation'>Location</label></div><div class='column'>" + chooseLocation + "</div></div>";
+        let t4 = "<div class='row'><div class='column'><label for='selectDeliverySlots'>Delivery Slots</label></div><div class='column'>" + chooseDeliverySlots + "</div></div>";
+        let t5 = "<div class='row'><div class='column'><label for='AddToOrder'>Add to Order</label></div><div class='column2'>" + chooseProduct + chooseQuantity + "<button class='btnblack' onclick='addOrder()'>Add to Order</button></div></div>";
+
+        let t6 = "<div class='row'><div class='column'><label for='AddToOrder'></label></div><div class='column'><button class='btnblack' onclick='completeOrder()'>Order Complete</button><button class='btnblack' onclick='cancelOrder()'>Cancel Order</button></div></div>";
+
+        let str5 = t1 + t2 + t3 + t4 + t5 + t6;
+
+        //----------------------------------------------
+
+
+        document.getElementById("table").innerHTML = str5 + "<div id='table2'>" + showCart(cartItem) + "</div>";
+    }
+
+    //-----------------------------------------------------
+    function addOrder() {
+
+        let p1 = document.getElementById("selectProduct");
+        let p2 = document.getElementById("selectQuantity");
+
+        if (p1.value == "Select Product")
+            alert("Please Select Product");
+        else if (p2.value == "Select quantity") {
+            alert("Please Select Quantity");
+        } else {
+            let index = cartItem.findIndex(n1 => n1.prodcode == p1.value);
+            if (index != -1) {
+                cartItem[index].quantity += +p2.value;
+            } else {
+                let p10 = {
+                    prodcode: p1.value,
+                    quantity: +p2.value
+                };
+                cartItem.push(p10);
+            }
+            document.getElementById("table2").innerHTML = showCart(cartItem);
+        }
+    }
+    //--------------------------------------------------------------------------------------
+    function showCart(cartItems) {
+        let str = "";
+
+        let str2 = "";
+        let headerarr = ['Code', "Name", 'Price', 'Quantity', 'Discount', 'Net Amount'];
+
+
+        let str1 = "";
+        for (let i = 0; i < headerarr.length; i++) {
+            str1 += "<div class='head1'>" + headerarr[i] + "</div>";
+        }
+        str1 += "<div class='headblank'>blank</div>";
+        str += "<div>" + str1 + "</div>";
+
+
+
+        for (let i = 0; i < cartItems.length; i++) {
+            let obj1 = cartItems[i];
+            let obj2 = Products.find(n1 => obj1.prodcode == n1.prodcode);
+
+            let cls = "cell0";
+            let netAmount = 0;
+            if (obj2.offer == "None") {
+                netAmount = obj2.price * obj1.quantity;
+            } else {
+                netAmount = (obj2.price * obj1.quantity) - (obj2.price * obj1.quantity) * (+obj2.offer.slice(0, 2) / 100);
+            }
+            let p1 = "<div class='" + cls + "'>" + obj2.prodcode + "</div>";
+            let p2 = "<div class='" + cls + "'>" + obj2.prodname + "</div>";
+            let p3 = "<div class='" + cls + "'>" + obj2.price + "</div>";
+            let p4 = "<div class='" + cls + "'>" + obj1.quantity + "</div>";
+            let p5 = "<div class='" + cls + "'>" + obj2.offer + "</div>";
+            let p6 = "<div class='" + cls + "'>" + netAmount + "</div>";
+            let p7 = "<div class='" + cls + "'>" + "<button class='btnblack' onclick=remove('" + obj2.prodcode + "')>Remove</button>" + "</div>";
+
+            let row = "<div>" + p1 + p2 + p3 + p4 + p5 + p6 + p7 + "</div>";
+            str += row;
+        }
+        str += "<br>";
+
+        return str;
+    }
+
+    function remove(pcode) {
+        // console.log(pcode)
+        let index = cartItem.findIndex(n1 => n1.prodcode == pcode);
+        cartItem.splice(index, 1);
+        orderForm(cartItem);
+    }
+
+    function cancelOrder() {
+        cartItem = [];
+        orderForm(cartItem);
+    }
+
+    function completeOrder() {
+        let m1 = document.getElementById("CustomerName").value;
+        let m2 = document.getElementById("MobileNumber").value;
+        let m3 = document.getElementById("selectlocation").value;
+        let m4 = document.getElementById("selectDeliverySlots").value;
+        // console.log("m1", m1);
+        // console.log("m2", m2);
+        // console.log("m3", m3);
+        // console.log("m4", m4);
+        if (m1.length < 5) {
+            alert("Name should be minimum 5 chars");
+        } else if (m2.length != 10) {
+            alert("Mobile number should have 10 chars");
+
+        } else if (isNaN(+m2)) {
+            // console.log();
+            alert("Mobile number should have digits only");
+        } else if (m3 == "Choose Location") {
+            alert("Select the location");
+        } else if (m4 == "Choose Delivery Slot") {
+            alert("Select the delivery slot");
+        } else if (cartItem.length == 0) {
+            alert("Cart is Empty");
+        } else {
+            let TotalValue = 0;
+            for (let i = 0; i < cartItem.length; i++) {
+
+
+                let obj1 = cartItem[i];
+                let obj2 = Products.find(n1 => obj1.prodcode == n1.prodcode);
+
+
+                let netAmount = 0;
+                if (obj2.offer == "None") {
+                    netAmount = obj2.price * obj1.quantity;
+                } else {
+                    netAmount = (obj2.price * obj1.quantity) - (obj2.price * obj1.quantity) * (+obj2.offer.slice(0, 2) / 100);
+                }
+                TotalValue += netAmount;
+            }
+
+            //----------------------------------------------------------------------------------
+            let f1 = {
+                "custname": m1,
+                "mobile": m2,
+                "location": m3,
+                "slot": m4,
+                "value": TotalValue,
+                "items": cartItem
+            };
+            cartItem = [];
+            Orders.push(f1);
+            showallorders();
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,28 @@
+<div class="bg-light text-center">
+    <h4>Welcome to an exciting match</h4>
+    <div class="row">
+        <div class="col-2"></div>
+        <h5 class="col-1 text-center">
+            {{ teams[0] }}
+        </h5>
+        <h5 class="col-6 text-center">{{ team1Score }}-{{ team2Score }}</h5>
+        <h5 class="col-1 text-center">
+            {{ teams[1] }}
+        </h5>
+        <div class="col-2"></div>
+        <div class="col-2"></div>
+        <div class="col-1 text-center">
+            <button class="btn btn-warning" (click)="goalScore1()">
+        Goal Scored
+      </button>
+        </div>
+        <div class="col-6 text-center"></div>
+        <div class="col-1 text-left">
+            <button class="btn btn-warning" (click)="goalScore2()">
+        Goal Scored
+      </button>
+        </div>
+        <div class="col-2"></div>
+    </div>
+    <button class="btn btn-warning" (click)="matchOver()">Match Over</button>
+</div>

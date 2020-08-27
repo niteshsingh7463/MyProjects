@@ -1,0 +1,17 @@
+<div class="row m-2">
+    <div class="col-6"></div>
+    <div class="col-6 border">
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-2 pt-1">VIEW</div>
+
+            <div class="col-2 p-2 fa fa-list" (click)="view(1)"></div>
+
+            <div class="col-2 p-2 fa fa-th" (click)="view(2)"></div>
+            <div class="col-2 p-2 fa fa-desktop" (click)="view(3)"></div>
+        </div>
+    </div>
+</div>
+<app-grid-view *ngIf="gridBool"></app-grid-view>
+<app-list-view *ngIf="listBool"></app-list-view>
+<app-gallery-view *ngIf="galleryBool"></app-gallery-view>

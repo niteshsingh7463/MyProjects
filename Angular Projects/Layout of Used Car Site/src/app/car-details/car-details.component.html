@@ -1,0 +1,154 @@
+<div class="row">
+    <div class="col-2"></div>
+    <img src="{{ adBanner }}" class="col-8 m-2" alt="" />
+    <div class="col-2"></div>
+</div>
+<nav aria-label="breadcrumb m-2">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#" (click)="gotoHome()">Home</a></li>
+        <li class="breadcrumb-item">
+            <a href="#">{{ carData[showIndex].make }}</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            {{ carData[showIndex].model }}
+        </li>
+    </ol>
+</nav>
+<div class="container-fluid row">
+    <div class="col col-8 border m-2 bg-dark">
+        <div class="row">
+            <div class="col-2">
+                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </div>
+            <div class="col-8">
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img class="d-block w-100" src="{{ carData[showIndex].image }}" alt="First slide" />
+                        </div>
+                        <div class="carousel-item" *ngFor="let item of carouselImages[showIndex].urls">
+                            <img class="d-block w-100" src="{{ item }}" alt="Second slide" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+        <!-- ================= -->
+
+        <div class="row border bg-light">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-12 fa-2x">DETAILS</div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-6">BRAND</div>
+
+                            <div class="col-6">{{ carData[showIndex].make }}</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6">YEAR</div>
+
+                            <div class="col-6">{{ carData[showIndex].year }}</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6">KM DRIVEN</div>
+
+                            <div class="col-6">{{ carData[showIndex].miles }}</div>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-6">MODEL</div>
+
+                            <div class="col-6">{{ carData[showIndex].model }}</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6">FUEL</div>
+
+                            <div class="col-6">{{ carData[showIndex].fuel }}</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ================= -->
+                <hr />
+                <div class="row">
+                    <div class="col-12 fa-2x">DESCRIPTION</div>
+                </div>
+
+                <div class="row" *ngFor="let item of carDesc[showIndex].extraInfo">
+                    <div class="col-12">{{ item }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col m-2">
+        <div class="row">
+            <div class="col-12 border">
+                <div class="row">
+                    <div class="col-9">
+                        <div class="card-text h3 mb-3">₹{{ carData[showIndex].price }}</div>
+                    </div>
+                    <div class="col-3 h6 mb-3 text-right">
+                        <i class="fa fa-share-alt fa-lg mr-2" aria-hidden="true"></i>
+                        <i class="fa fa-heart ml-2 fa-lg"></i>
+                    </div>
+                </div>
+
+                <div class="h6 mb-3">
+                    {{ carData[showIndex].year }} - {{ carData[showIndex].miles }} km
+                </div>
+                <div class="h6 mb-3">
+                    {{ carData[showIndex].make }} {{ carData[showIndex].model }}, {{ carData[showIndex].year }}, {{ carData[showIndex].fuel }}
+                </div>
+                <div class="row">
+                    <div class="col-9">
+                        <div class="card-text h6 mb-3">
+                            {{ carData[showIndex].location }}, {{ carData[showIndex].city }}
+                        </div>
+                    </div>
+                    <div class="col-3 h6 mb-3 text-right">
+                        {{ carData[showIndex].postedOn }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 border">
+                <div class="row">
+                    <div class="col-12 fa-2x">
+                        Seller Description
+                    </div>
+                </div>
+                <div class="row">
+                    <img src="{{ seller }}" class="col-4" alt="" />
+
+                    <div class="col-7">
+                        <div class="row mt-5">
+                            <div class="col-12">Mr. John</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <button class="btn btn-block btn-primary">Chat with seller!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

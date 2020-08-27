@@ -1,0 +1,46 @@
+<div class="container">
+    <nav class="navbar navbar-dark bg-dark text-white">
+        <a class="navbar-brand" href="#">Football Tournament</a>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Number of Matches
+          <button
+            class="btn btn-primary btn-sm"
+            style="border-radius: 35px; width: 35px; font-size: small;"
+          >
+            {{ numberOfMatches }}
+          </button>
+          <span class="sr-only">(current)</span></a
+        >
+      </li>
+    </ul>
+  </nav>
+  <!-- =============================Nav End================================== -->
+  <button class="btn btn-primary m-3" (click)="allMatches()">
+    All Matches
+  </button>
+  <button class="btn btn-primary m-3" (click)="pointsTablefun()">
+    Points Table
+  </button>
+  <button class="btn btn-primary m-3" (click)="newmatch()">New Match</button>
+  <!-- ======================================================================= -->
+  <app-new-match
+    [teamList]="allTeams"
+    (startMatchEvent)="teamEvent($event)"
+    *ngIf="newmatchComponent"
+  ></app-new-match>
+  <app-match
+    [teams]="teamarr"
+    *ngIf="matchComponent"
+    (matchevent)="matchEvent($event)"
+  ></app-match>
+  <app-all-match
+    *ngIf="allmatchComponent"
+    [allMatches]="AllMatches"
+  ></app-all-match>
+  <app-points-table
+    *ngIf="ptbool"
+    [PointsTable]="pointsTable"
+    (btnSortEvent)=btnSortEvent($event)
+  ></app-points-table>
+</div>

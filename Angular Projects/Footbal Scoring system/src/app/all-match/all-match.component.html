@@ -1,0 +1,23 @@
+<div class="container text-center">
+    <h4>Results of the matches so far</h4>
+    <div class="row bg-dark text-white border">
+        <div class="col-2">Team1</div>
+        <div class="col-2">Team2</div>
+        <div class="col-2">Score</div>
+        <div class="col-6">Result</div>
+    </div>
+    <div class="border row" *ngFor="let item of allMatches">
+        <div class="col-2">{{ item.teams[0] }}</div>
+        <div class="col-2">{{ item.teams[1] }}</div>
+        <div class="col-2">{{ item.scores[0] }}-{{ item.scores[1] }}</div>
+        <div class="col-6" *ngIf="item.scores[0] > item.scores[1]">
+            {{ item.teams[0] }} Won
+        </div>
+        <div class="col-6" *ngIf="item.scores[1] > item.scores[0]">
+            {{ item.teams[1] }} Won
+        </div>
+        <div class="col-6" *ngIf="item.scores[1] == item.scores[0]">
+            Match Drawn
+        </div>
+    </div>
+</div>

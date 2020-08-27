@@ -1,0 +1,38 @@
+<div class="container-fluid">
+    <span class="text-success">
+    {{ +startIndex + 1 }} - {{ endIndex }} entries
+  </span>
+    <div class="row mr-5">
+        <div class="col col-3 text-center bg-success border" *ngFor="let item of allData.items">
+            <div class="col-10 ml-3">
+                <img class="img-fluid" *ngIf="item.volumeInfo.imageLinks" src="{{ item.volumeInfo.imageLinks.thumbnail }}" alt="N/A" style="width: 100px; height: 140px;" />
+                <img *ngIf="!item.volumeInfo.imageLinks" src="" alt="N/A" style="width: 100px; height: 140px;" class="border" />
+
+                <h5>{{ item.volumeInfo.title }}</h5>
+
+                <h6>{{ item.volumeInfo.authors }}</h6>
+                <h6>{{ item.volumeInfo.categories }}</h6>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-5 text-left">
+            <button class="btn btn-warning m-4" *ngIf="startIndex > 0 && !prevBool" (click)="pageFun(-1)">
+        Prev
+      </button>
+        </div>
+        <div class="col-2">
+            <button class="btn btn-warning m-4 text-center" *ngIf="prevBool && startIndex > 0" (click)="pageFun(-1)">
+        Prev
+      </button>
+            <button class="btn btn-warning m-4 text-center" *ngIf="startIndex == 0 && !prevBool" (click)="pageFun(1)">
+        Next
+      </button>
+        </div>
+        <div class="col-4 text-right">
+            <button class="btn btn-warning mt-4" *ngIf="startIndex > 0 && !prevBool" (click)="pageFun(1)">
+        Next
+      </button>
+        </div>
+    </div>
+</div>

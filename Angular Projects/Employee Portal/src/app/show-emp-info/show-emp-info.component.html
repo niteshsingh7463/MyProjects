@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="row">
+        <div class="col-5 border" style="text-overflow: nowrap;">
+            <h6>{{ arr[pageNum - 1].name }}</h6>
+            <span>{{ arr[pageNum - 1].email }}</span> <br />
+            <span>{{ arr[pageNum - 1].mobile }}</span> <br />
+            <span>{{ arr[pageNum - 1].location }}</span> <br />
+            <span>{{ arr[pageNum - 1].department }}</span> <br />
+            <span>{{ arr[pageNum - 1].designation }}</span> <br />
+            <span>{{ arr[pageNum - 1].salary }}</span>
+        </div>
+        <div *ngIf="arr.length > 1" class="col-5 border">
+            <h6>{{ arr[pageNum].name }}</h6>
+            <span>{{ arr[pageNum].email }}</span> <br />
+            <span>{{ arr[pageNum].mobile }}</span> <br />
+            <span>{{ arr[pageNum].location }}</span> <br />
+            <span>{{ arr[pageNum].department }}</span> <br />
+            <span>{{ arr[pageNum].designation }}</span> <br />
+            <span>{{ arr[pageNum].salary }}</span> <br />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-5">
+            <button *ngIf="pageNum > 1" class="btn btn-primary" (click)="btn(-1)">
+        Previous
+      </button>
+        </div>
+        <div class="col-4"></div>
+        <div class="col-1">
+            <button *ngIf="pageNum < arr.length - 1" class="btn btn-primary" (click)="btn(1)">
+        Next
+      </button>
+        </div>
+    </div>
+</div>

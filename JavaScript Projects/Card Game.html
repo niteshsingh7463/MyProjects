@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JS-AN-C2-Section_2</JS-AN-c2>
+    </title>
+    <style>
+        .outer {
+            width: 100px;
+            margin-right: 80px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .outer2 {
+            width: 100px;
+            margin-right: 80px;
+            display: inline-block;
+            position: relative;
+        }
+        
+        .imagesize {
+            width: 100px;
+            height: 200px;
+            border: 2px solid black;
+        }
+        
+        .overlay {
+            position: absolute;
+            z-index: 2;
+        }
+        
+        .overlay2 {
+            z-index: 2;
+            position: absolute;
+            left: 45px;
+        }
+        /* =========================================== */
+        
+        .btnblack {
+            background-color: black;
+            color: white;
+            border-radius: 2px;
+            margin: 5px;
+        }
+        
+        .btnblack:hover {
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="btnblack" onclick="start1(8)">Start Again</button>
+
+    <div id="show"></div>
+</body>
+<script>
+    let image12 = [{
+        num: 1,
+        color: "blue",
+        image: "https://i.ibb.co/gzf0nTK/1-blue.jpg"
+    }, {
+        num: 1,
+        color: "red",
+        image: "https://i.ibb.co/d2TQ9QN/1-red.jpg"
+    }, {
+        num: 2,
+        color: "blue",
+        image: "https://i.ibb.co/mNNtDd4/2-blue.jpg"
+    }, {
+        num: 2,
+        color: "red",
+        image: "https://i.ibb.co/xzvjvv6/2-red.jpg"
+    }, {
+        num: 3,
+        color: "blue",
+        image: "https://i.ibb.co/6HRCdMr/3-blue.jpg"
+    }, {
+        num: 3,
+        color: "red",
+        image: "https://i.ibb.co/sHTfS0y/3-red.jpg"
+    }, {
+        num: 4,
+        color: "blue",
+        image: "https://i.ibb.co/H4rjRxq/4-blue.jpg"
+    }, {
+        num: 4,
+        color: "red",
+        image: "https://i.ibb.co/r0JNyvT/4-red.jpg"
+    }, {
+        num: 5,
+        color: "blue",
+        image: "https://i.ibb.co/Bzjct6c/5-blue.jpg"
+    }, {
+        num: 5,
+        color: "red",
+        image: "https://i.ibb.co/k9cB2kw/5-red.jpg"
+    }, {
+        num: 6,
+        color: "blue",
+        image: "https://i.ibb.co/yFSygQX/6-blue.jpg"
+    }, {
+        num: 6,
+        color: "red",
+        image: "https://i.ibb.co/6BYRdgq/6-red.jpg"
+    }, {
+        num: 7,
+        color: "blue",
+        image: "https://i.ibb.co/XbvzkVs/7-blue.jpg"
+    }, {
+        num: 7,
+        color: "red",
+        image: "https://i.ibb.co/rxYcQgg/7-red.jpg"
+    }, {
+        num: 8,
+        color: "blue",
+        image: "https://i.ibb.co/dBmxVrh/8-blue.jpg"
+    }, {
+        num: 8,
+        color: "red",
+        image: "https://i.ibb.co/FBTxzDQ/8-red.jpg"
+    }, {
+        num: 9,
+        color: "blue",
+        image: "https://i.ibb.co/dLjm3xB/9-blue.jpg"
+    }, {
+        num: 9,
+        color: "red",
+        image: "https://i.ibb.co/7rG9xsL/9-red.jpg"
+    }, {
+        num: 10,
+        color: "blue",
+        image: "https://i.ibb.co/Sfcy44f/10-blue.jpg"
+    }, {
+        num: 10,
+        color: "red",
+        image: "https://i.ibb.co/ScK7K5W/10-red.jpg"
+    }, {
+        num: 1,
+        color: "blue",
+        image: "https://i.ibb.co/gzf0nTK/1-blue.jpg"
+    }, {
+        num: 1,
+        color: "red",
+        image: "https://i.ibb.co/d2TQ9QN/1-red.jpg"
+    }, {
+        num: 2,
+        color: "blue",
+        image: "https://i.ibb.co/mNNtDd4/2-blue.jpg"
+    }, {
+        num: 2,
+        color: "red",
+        image: "https://i.ibb.co/xzvjvv6/2-red.jpg"
+    }, {
+        num: 3,
+        color: "blue",
+        image: "https://i.ibb.co/6HRCdMr/3-blue.jpg"
+    }, {
+        num: 3,
+        color: "red",
+        image: "https://i.ibb.co/sHTfS0y/3-red.jpg"
+    }, {
+        num: 4,
+        color: "blue",
+        image: "https://i.ibb.co/H4rjRxq/4-blue.jpg"
+    }, {
+        num: 4,
+        color: "red",
+        image: "https://i.ibb.co/r0JNyvT/4-red.jpg"
+    }, {
+        num: 5,
+        color: "blue",
+        image: "https://i.ibb.co/Bzjct6c/5-blue.jpg"
+    }, {
+        num: 5,
+        color: "red",
+        image: "https://i.ibb.co/k9cB2kw/5-red.jpg"
+    }, {
+        num: 6,
+        color: "blue",
+        image: "https://i.ibb.co/yFSygQX/6-blue.jpg"
+    }, {
+        num: 6,
+        color: "red",
+        image: "https://i.ibb.co/6BYRdgq/6-red.jpg"
+    }, {
+        num: 7,
+        color: "blue",
+        image: "https://i.ibb.co/XbvzkVs/7-blue.jpg"
+    }, {
+        num: 7,
+        color: "red",
+        image: "https://i.ibb.co/rxYcQgg/7-red.jpg"
+    }, {
+        num: 8,
+        color: "blue",
+        image: "https://i.ibb.co/dBmxVrh/8-blue.jpg"
+    }, {
+        num: 8,
+        color: "red",
+        image: "https://i.ibb.co/FBTxzDQ/8-red.jpg"
+    }, {
+        num: 9,
+        color: "blue",
+        image: "https://i.ibb.co/dLjm3xB/9-blue.jpg"
+    }, {
+        num: 9,
+        color: "red",
+        image: "https://i.ibb.co/7rG9xsL/9-red.jpg"
+    }, {
+        num: 10,
+        color: "blue",
+        image: "https://i.ibb.co/Sfcy44f/10-blue.jpg"
+    }, {
+        num: 10,
+        color: "red",
+        image: "https://i.ibb.co/ScK7K5W/10-red.jpg"
+    }];
+    //---------------------------------------------------------------------------------------------------
+    let images786 = [];
+    let arr10 = [];
+    //======================================================================================================
+
+    function random1() {
+
+        let tempNumbers = [...image12];
+        let shuffledNumbers = [];
+        for (let i = 0; i < image12.length; i++) {
+            let randindex = Math.trunc(Math.random() * tempNumbers.length);
+            shuffledNumbers.push(tempNumbers[randindex]);
+            tempNumbers.splice(randindex, 1);
+        }
+        images786 = shuffledNumbers;
+    }
+    let div1 = document.getElementById("show");
+    let str = "";
+
+    //====================Vertical===================
+    function start1(num) {
+        arr10 = [];
+
+
+        for (let i = 0; i < num; i++) {
+            arr10.push([]);
+
+        }
+        random1();
+        // console.log(image12)
+        for (let i = 0; i < image12.length; i++) {
+            arr10[i % num].push(images786[i]);
+
+        }
+        // console.log(arr10)
+        show();
+
+    }
+
+    function show() {
+        let str = "";
+        for (let i = 0; i < arr10.length; i++) {
+
+            str = str + "<div class='outer'>";
+            for (let j = 0; j < arr10[i].length; j++) {
+                let styles = "top:" + (j * 40) + "px";
+                if (arr10[i][0].image == "https://i.ibb.co/7V82p6m/Blank.jpg") {
+                    str = str + "<img class='imagesize overlay' src='" + arr10[i][j].image + "' style='" + styles + "' draggable='false'" + " ondragstart='drag(event," + i + "," + j + ")' ondrop='drop(event," + i + ")'" + " ondragover='allowDrop(event)'>";
+
+                } else {
+                    str = str + "<img class='imagesize overlay' src='" + arr10[i][j].image + "' style='" + styles + "' draggable='true'" + " ondragstart='drag(event," + i + "," + j + ")' ondrop='drop(event," + i + ")'" + " ondragover='allowDrop(event)'>";
+                }
+
+            }
+            str = str + "</div>";
+        }
+
+
+
+        div1.innerHTML = str;
+    }
+    //==========================================================================================
+    let dragImageindex = -1;
+
+
+    function allowDrop(ev) {
+        ev.preventDefault();
+    }
+
+    function drag(ev, ...dragIndex) {
+
+        dragImageindex = dragIndex;
+
+    }
+
+    function drop(ev, dropIndex) {
+        let arrIndex = dragImageindex[0];
+        let elementIndex = dragImageindex[1];
+        ev.preventDefault();
+        let flag = 1;
+        for (let i = 0; i < arr10[arrIndex].length - elementIndex; i++) {
+            if (arr10[arrIndex][elementIndex + i].num != (arr10[arrIndex][elementIndex].num - i)) {
+                flag = -1;
+                break;
+            }
+        }
+
+        if (flag == 1) {
+            // console.log(arr10[dropIndex][(arr10[dropIndex].length) - 1].color);
+            if (arr10[dropIndex][(arr10[dropIndex].length) - 1].num == (arr10[arrIndex][elementIndex].num + 1) || arr10[dropIndex][0].color == "blank") {
+                let temp = arr10[arrIndex].splice(elementIndex, arr10[dragImageindex[0]].length - elementIndex);
+                if (arr10[arrIndex].length == 0) {
+                    arr10[arrIndex][0] = {
+                        num: 0,
+                        color: "blank",
+                        image: "https://i.ibb.co/7V82p6m/Blank.jpg"
+                    }
+                }
+                if (arr10[dropIndex][0].color == "blank") {
+                    arr10[dropIndex].splice(0, 1);
+                }
+                for (let i = 0; i < temp.length; i++) {
+                    arr10[dropIndex].push(temp[i]);
+                }
+                // console.log("splice", arr10[arrIndex].splice(elementIndex, arr10[dragImageindex[0]].length - elementIndex))
+            }
+
+        }
+        show();
+        checkNice();
+    }
+
+    function checkNice() {
+        let count = 1;
+
+        for (let i = 0; i < arr10.length; i++) {
+            let b = "";
+            for (let j = 0; j < arr10[i].length; j++) {
+
+                b += arr10[i][j].num;
+            }
+            if (b == "10987654321") {
+
+                arr10[i].splice(0, 10);
+                if (arr10[i].length == 0) {
+                    arr10[i][0] = {
+                        num: 0,
+                        color: "blank",
+                        image: "https://i.ibb.co/7V82p6m/Blank.jpg"
+                    }
+                }
+
+                alert("A set of 10 numbers has been made!!!");
+                show();
+            }
+            if (arr10[i][0].num == 0) {} else {
+                count = 0;
+            }
+
+        }
+        if (count == 1) {
+            alert("Nice Work!!!!");
+        }
+    }
+</script>
+
+</html>

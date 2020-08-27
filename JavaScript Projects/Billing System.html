@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>JS-D1#7_Task1</title>
+    <style>
+        .cellheader {
+            display: inline-block;
+            color: white;
+            /* background-color: aqua; */
+        }
+        
+        .cell {
+            display: inline-block;
+            color: black;
+            /* background-color: aqua; */
+        }
+        
+        #header {
+            background-color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">BillingSystem</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="newBill()" href="#">New Bill <span class="sr-only">(current)</span></a>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+        <br>
+        <div id="show2"></div>
+        <div id="show4"></div>
+        <div id="show1"></div>
+    </div>
+</body>
+<script>
+    let allProducts = [{
+        "code": "PEP221",
+        "prod": "Pepsi",
+        "price": 12,
+        "instock": "Yes",
+        "category": "Beverages"
+    }, {
+        "code": "COK113",
+        "prod": "Coca Cola",
+        "price": 18,
+        "instock": "Yes",
+        "category": "Beverages"
+    }, {
+        "code": "MIR646",
+        "prod": "Mirinda",
+        "price": 15,
+        "instock": "No",
+        "category": "Beverages"
+    }, {
+        "code": "SLI874",
+        "prod": "Slice",
+        "price": 22,
+        "instock": "Yes",
+        "category": "Beverages"
+    }, {
+        "code": "MIN654",
+        "prod": "Minute Maid",
+        "price": 25,
+        "instock": "Yes",
+        "category": "Beverages"
+    }, {
+        "code": "APP652",
+        "prod": "Appy",
+        "price": 10,
+        "instock": "No",
+        "category": "Beverages"
+    }, {
+        "code": "FRO085",
+        "prod": "Frooti",
+        "price": 30,
+        "instock": "Yes",
+        "category": "Beverages"
+    }, {
+        "code": "REA546",
+        "prod": "Real",
+        "price": 24,
+        "instock": "No",
+        "category": "Beverages"
+    }, {
+        "code": "DM5461",
+        "prod": "Dairy Milk",
+        "price": 40,
+        "instock": "Yes",
+        "category": "Chocolates"
+    }, {
+        "code": "KK6546",
+        "prod": "Kitkat",
+        "price": 15,
+        "instock": "Yes",
+        "category": "Chocolates"
+    }, {
+        "code": "PER5436",
+        "prod": "Perk",
+        "price": 8,
+        "instock": "No",
+        "category": "Chocolates"
+    }, {
+        "code": "FST241",
+        "prod": "5 Star",
+        "price": 25,
+        "instock": "Yes",
+        "category": "Chocolates"
+    }, {
+        "code": "NUT553",
+        "prod": "Nutties",
+        "price": 18,
+        "instock": "Yes",
+        "category": "Chocolates"
+    }, {
+        "code": "GEM006",
+        "prod": "Gems",
+        "price": 8,
+        "instock": "No",
+        "category": "Chocolates"
+    }, {
+        "code": "GD2991",
+        "prod": "Good Day",
+        "price": 25,
+        "instock": "Yes",
+        "category": "Biscuits"
+    }, {
+        "code": "PAG542",
+        "prod": "Parle G",
+        "price": 5,
+        "instock": "Yes",
+        "category": "Biscuits"
+    }, {
+        "code": "MON119",
+        "prod": "Monaco",
+        "price": 7,
+        "instock": "No",
+        "category": "Biscuits"
+    }, {
+        "code": "BOU291",
+        "prod": "Bourbon",
+        "price": 22,
+        "instock": "Yes",
+        "category": "Biscuits"
+    }, {
+        "code": "MAR951",
+        "prod": "MarieGold",
+        "price": 15,
+        "instock": "Yes",
+        "category": "Biscuits"
+    }, {
+        "code": "ORE188",
+        "prod": "Oreo",
+        "price": 30,
+        "instock": "No",
+        "category": "Biscuits"
+    }];
+    let allcategory = ["Select Category", "Beverages", "Chocolates", "Biscuits"];
+    let allpricerange = ["Select Price Range", "<10", "10-20", ">20"];
+    let allinstock = ["Select In Stock", "Yes", "No"];
+    let sortindex = -1;
+    let Products = allProducts;
+    let cart = [];
+    //=========================================================================
+    function closeBill() {
+        alert("Closing the current bill");
+        sortindex = -1;
+        Products = allProducts;
+        cart = [];
+        show2();
+        showBill(allProducts);
+        show4();
+    }
+    //====================================Show()========================================
+    function newBill() {
+        sortindex = -1;
+        Products = allProducts;
+        cart = [];
+        show2();
+        showBill(allProducts);
+        show4();
+    }
+    //==========================================================================
+    function show2() {
+        let items1 = cart.length;
+        let Quantity1 = cart.reduce((acc, curr) => (acc + curr.quantity), 0);
+        let Amount1 = cart.reduce((acc, curr) => (acc + (curr.quantity * curr.price)), 0);
+        let row1 = "";
+
+        row1 += "<div class='row bg-light'><div class='col-12'><h4>Details of Current Bill</h4></div><div class='col-12'>Items:" + items1 + ", Quantity:" + Quantity1 + ", Amount:" + Amount1 + "</div></div><div id='show3'></div>";
+        document.getElementById("show2").innerHTML = row1;
+
+    }
+
+    function show4() {
+        let ele = document.getElementById("show4");
+        let row2 = "<div class='text-center'><h4>Product List</h4><div><form><div class='form-row '><div class='form-group col-3 text-left'><h6>Filter Products by:</h6></div><div class='col-3 form-group'><select class='form-control' onchange='filtered()' id='category'>" + createOptions(allcategory) + "</select></div><div class='col-3 from-group'><select onchange='filtered()'  class='form-control' id='instock'>" + createOptions(allinstock) + "</select></div><div class='col-3 from-group'><select class='form-control' id='pricerange' onchange='filtered()' >" + createOptions(allpricerange) + "</select></div></div></form>";
+        ele.innerHTML = row2;
+    }
+
+    function showCart() {
+
+        let ele = document.getElementById("show3");
+        if (cart.length == 0) {
+            ele.innerHTML = "";
+        } else {
+            let data = cart.map(createCartElement);
+            ele.innerHTML = data.join(" ") + "<div class='row bg-light'><button class='btn btn-primary btn-sm' style='margin-left:10px' onclick='closeBill()'>Close Bill</button></div>";
+        }
+    }
+
+    function createCartElement(n1, cartIndex) {
+        return "<div class='row border bg-light'><div class='col-6 tet-left'>" + n1.code + " " + n1.prod + " Price:" + n1.price + " Quantity:" + n1.quantity + " Value:" + n1.value + "</div><div class='col-6 text-left'><button class='btn btn-sm text-center btn-success mr-2' onclick='increasequantity(" + cartIndex + ")'>+</button><button class='btn btn-sm text-center btn-warning mr-2' onclick='decreasequantity(" + cartIndex + ")'>-</button><button class='btn btn-sm btn-danger text-center mr-2' onclick='remove(" + cartIndex + ")'>x</button></div></div>";
+    }
+    //====================================================================
+    //============================================================================
+    function increasequantity(cartIndex) {
+        let p1 = cart[cartIndex];
+        p1.quantity += 1;
+        p1.value = p1.quantity * p1.price;
+
+        show2();
+        showCart();
+    }
+
+    function decreasequantity(cartIndex) {
+        let p1 = cart[cartIndex];
+        p1.quantity -= 1;
+        p1.value = p1.quantity * p1.price;
+        if (p1.quantity == 0) {
+            remove(cartIndex);
+        } else {
+            show2();
+            showCart();
+        }
+    }
+
+    function remove(cartIndex) {
+        cart.splice(cartIndex, 1);
+        show2();
+        showCart();
+    }
+    //=======================================================================================
+    function showBill(arr) {
+        let str = "";
+        let header = "";
+
+        let row3 = "";
+        let data = "";
+        header += "<div class='row text-left' id='header'><div class='cellheader col-2' id='0' onclick='sortByParameter(0)'>Code</div>";
+        header += "<div class=' col-2 cellheader' id='1' onclick='sortByParameter(1)'>Product</div>";
+        header += "<div class=' col-2 cellheader' id='2' onclick='sortByParameter(2)'>Category</div>";
+        header += "<div class='cellheader col-2' id='3' onclick='sortByParameter(3)'>Price</div>";
+        header += "<div class='col-2 cellheader' id='4' onclick='sortByParameter(4)'>In Stock</div>";
+        header += "<div class='cellheader col-2'></div></div>";
+
+        let data2 = arr.map(createElement);
+        data = data2.join(" ");
+        row3 += header + data;
+        //----------------------------------------------
+        str += row3;
+        let ele = document.getElementById("show1");
+        ele.innerHTML = str;
+    }
+
+    function createElement(obj, index) {
+        return "<div class='row text-left border' id='child'><div class='cell col-2'>" + obj.code + "</div><div class=' col-2 cell'>" + obj.prod + "</div><div class=' col-2 cell'>" + obj.category + "</div><div class='cell col-2'>" + obj.price + "</div><div class='col-2 cell'>" + obj.instock + "</div><div class='cell col-2'><button class='btn btn-secondary btn-sm' onclick='addToCart(" + index + ")'>Add To Bill</button></div></div>";
+
+    }
+
+    function createOptions(arr2) {
+        let str3 = "";
+        for (let i = 0; i < arr2.length; i++) {
+            str3 += "<option>" + arr2[i] + "</option>";
+
+        }
+        return str3;
+    }
+    //================================================================================
+
+    //====================================Sort()=====================================
+    function sortByParameter(n) {
+        sortindex = n;
+        switch (n) {
+            case 0:
+                Products.sort((n1, n2) => n1.code.localeCompare(n2.code));
+                break;
+            case 1:
+                Products.sort((n1, n2) => n1.prod.localeCompare(n2.prod));
+                break;
+            case 2:
+                Products.sort((n1, n2) => n1.category.localeCompare(n2.category));
+                break;
+            case 3:
+                Products.sort((n1, n2) => n1.price - n2.price);
+                break;
+            case 4:
+                Products.sort((n1, n2) => n1.instock.localeCompare(n2.instock));
+                break;
+        }
+        showBill(Products);
+        if (sortindex != -1) {
+            let txt1 = document.getElementById(n).innerText;
+            document.getElementById(n).innerText = txt1 + "(X)";
+        }
+    }
+    //====================================================================================
+    //=======================================filter()=============================================
+    function filtered() {
+        let temp = allProducts;
+        let elecategory = document.getElementById("category").value;
+        let eleinstock = document.getElementById("instock").value;
+        let elepricerange = document.getElementById("pricerange").value;
+        // console.log(elecategory, eleinstock, elepricerange);
+        if (elecategory == "Select Category") {
+
+        } else {
+            temp = allProducts.filter(n1 => n1.category == elecategory);
+        }
+        if (eleinstock == "Select In Stock") {
+
+        } else {
+            temp = temp.filter(n1 => n1.instock == eleinstock);
+        }
+        if (elepricerange == "Select Price Range") {
+
+        } else if (elepricerange == "<10") {
+            temp = temp.filter(n1 => n1.price < 10);
+        } else if (elepricerange == "10-20") {
+            temp = temp.filter(n1 => (n1.price >= 10) && (n1.price < 20));
+        } else if (elepricerange == ">20") {
+            temp = temp.filter(n1 => n1.price >= 20);
+        }
+        Products = temp;
+        sortByParameter(sortindex);
+
+    }
+    //====================================================================================
+    //==================================Cart()============================================
+    function addToCart(index) {
+
+        let obj = Products[index];
+        if (cart.find(n1 => n1 == obj)) {
+            obj.quantity += 1;
+            obj.value = obj.quantity * obj.price;
+        } else {
+            obj.quantity = 1;
+            obj.value = obj.quantity * obj.price;
+            cart.push(obj);
+        }
+        show2();
+        showCart();
+
+    }
+    //====================================================================================
+</script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</html>

@@ -1,0 +1,14 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3">
+            <app-emp-options [designation]="designationStructure" [department]="deptStructure" (emitChangeEmpOpt)="emitChangeEmpOpt()"></app-emp-options>
+        </div>
+        <div class="col-9">
+            <h3 class="text-center">Welcome to Employee Portal</h3>
+            <h6>You have chosen</h6>
+            Location : {{ EPlocation }} <br /> Department : {{ EPDepartment }} <br /> Designation : {{ EPDesignation }} <br />
+            <br /> The number of employees matching the options : {{ currDisplayArr.length }}
+            <app-show-emp-info *ngIf="currDisplayArr.length > 0" [arr]="currDisplayArr" [pageNum]="currPage" (emitBtnChange)="gotoPage($event)"></app-show-emp-info>
+        </div>
+    </div>
+</div>

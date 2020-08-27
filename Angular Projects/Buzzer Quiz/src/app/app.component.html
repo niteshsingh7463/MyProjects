@@ -1,0 +1,33 @@
+<div class="container-fluid text-center">
+    <h1>Welcome to the Quiz Contest</h1>
+
+    <h2>Participants</h2>
+    <div class="row text-center m-2">
+        <div *ngFor="let item of participants; index as i" class="col m-2 {{ bg(i) }} text-center">
+            <h3>Name : {{ item }}</h3>
+            <div class="row">
+                <div class="col-12">
+                    <h4>Score : {{ scoreArr[i] }}</h4>
+                </div>
+            </div>
+            <button (click)="buzzer(i)">
+        BUZZER
+      </button>
+        </div>
+    </div>
+    <div *ngIf="qno == questions.length">
+        <h2>Game Over</h2>
+        <h2>{{ msg }}</h2>
+    </div>
+    <div *ngIf="qno < questions.length">
+        <h3>Question Number : {{ qno + 1 }}</h3>
+        <h4>{{ questions[qno].text }}</h4>
+        <div class="row">
+            <div class="col-12">
+                <button *ngFor="let item2 of questions[qno].options; index as i" class="btn btn-info m-2" (click)="check(i)">
+          {{ item2 }}
+        </button>
+            </div>
+        </div>
+    </div>
+</div>

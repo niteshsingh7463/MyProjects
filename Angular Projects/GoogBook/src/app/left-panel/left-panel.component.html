@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col-2"></div>
+    <div class="col-10">
+        <div class="row m-4">
+            <div class="col-12 p-2 form-control border bg-light">
+                <h6>Language</h6>
+            </div>
+            <div class="col-12 p-2 form-control border" *ngFor="let item of language.list">
+                <label><input
+            type="radio"
+            value="{{ item.value }}"
+            [(ngModel)]="language.selected"
+            name="gender1"
+            (change)="btnChange()"
+            checked="item.value==language.selected"
+          />
+          {{ item.name }}</label
+        >
+      </div>
+    </div>
+
+    <hr class="m-4" />
+    <div class="row m-4">
+      <div class="col-12 p-2 form-control border bg-light">
+        <h6>Filter</h6>
+      </div>
+      <div
+        class="col-12 p-2 form-control border"
+        *ngFor="let item of filter.list"
+      >
+        <label
+          ><input
+            type="radio"
+            value="{{ item.value }}"
+            name="gender3"
+            [(ngModel)]="filter.selected"
+            (change)="btnChange()"
+            checked="item.value==filter.selected"
+          />
+          {{ item.name }}</label
+        >
+      </div>
+    </div>
+  </div>
+</div>

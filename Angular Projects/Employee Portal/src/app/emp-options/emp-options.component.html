@@ -1,0 +1,27 @@
+<div class="container-fluid">
+    <h6>Designation</h6>
+
+    <div *ngFor="let item of designation.nameList" class="ml-3">
+        <label for="">
+      <input
+        type="radio"
+        value="{{ item }}"
+        [(ngModel)]="designation.selected"
+        class="form-check-input"
+        (change)="emitChange()"
+      />{{ item }}</label
+    >
+  </div>
+  <h6>Department</h6>
+  <div *ngFor="let item of department" class="ml-3">
+    <label for="">
+      <input
+        type="checkbox"
+        [(ngModel)]="item.selected"
+        value="{{ item.selected }}"
+        (change)="emitChange()"
+        class="form-check-input"
+      />{{ item.name }}</label
+    >
+  </div>
+</div>
