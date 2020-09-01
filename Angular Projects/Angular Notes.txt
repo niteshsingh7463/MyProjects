@@ -1,0 +1,92 @@
+=============================================ngrok========================================
+
+ngrok http -host-header=rewrite http://localhost:4200/
+
+====================================installing new project================================
+npm install -g @angular/cli@7.2.0
+ng new appname
+ng serve
+ng serve --port 4500   ==> (to run on targeted port)
+=====================================installing Bootstrap==================================
+1>>Go to vs code and open your project. In the project go to Terminal and open new terminal.
+
+2>> Install bootstrap using command npm install --save @ng-bootstrap/ng-bootstrap@4.0.0
+
+3>>Add following marked lines in app.module.ts
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+then in imports==>>
+NgbModule
+
+4>>Go to root style.css and add following lines.
+@import 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css';
+
+---------------------------------Steps after bootstrap installation---------------------------
+
+1>>Go to app.module.ts and write following marked line.
+==>>import {FormsModule} from '@angular/forms';
+
+2>>In app.module.ts in imports write the line which is marked below.
+==>>FormsModule
+
+3>> In settings json file add.
+==>>"editor.deffaultFormatter":"esbenp.prettier-vscode",
+	"editor.formatOnSave":true
+
+=========================================ServerSportStar=======================================
+The steps to run the server have been provided below:
+
+Go the folder which has package.json
+• Copy the file serverSportStar.js in that folder
+• Install express by running the command
+    npm install express --save
+• Run the command (you might need to press enter twice after running the command)
+    npm init
+• Run the command (it will display a message - The server is running on port 2410.)
+   node serverSportStar.js
+============================================[(ngModel)]=========================================
+
+ <input type="text" class="form-control" [(ngModel)]="course" /> 
+
+ngModel is a directive which binds input, select and textarea, 
+and stores the required user value in a variable and we can use that variable whenever
+ we require that value.
+ It also is used during validations in a form.
+
+=============================================*ngFor==============================================
+<div *ngFor="let c1 of cities">{{ c1 }}</div>
+<--------------------------------------------------------------------->
+<div *ngFor="let c1 of cities; index as i">
+        {{ c1 }}<span class="fa fa-trash" (click)="remove(i)"></span>
+    </div>
+<---------------------------------------------------------------------->
+
+============================================*ngIf=================================================
+ <p *ngIf="check">
+        This content is visible only when checktrue
+ </p>
+
+==============================================Nav==================================================
+<nav class="navbar navbar-expand navbar-dark bg-primary">
+        <a class="navbar-brand" routerLink="/">EDUFECT</a>
+
+        <div class="collapse navbar-collapse mr-auto">
+            <ul class="navbar-nav">
+                <li class="nav-item" *ngFor="let l1 of navlinks">
+                    <a class="nav-link" routerLink="{{ l1.link }}" routerLinkActive="{{ l1.active }}">{{ l1.txt }}</a
+          >
+        </li>
+      </ul>
+    </div>
+  </nav>
+=============================================HttpClientModule========================================
+
+import { HttpClientModule } from '@angular/common/http';  ====> in 'app-module.ts'.
+
+============================================updateOn=========================================================
+  firstName: ['initial value',{
+         validators: [Validators.required, Validators.minLength(2), forbiddenNameValidator(/bob/i)],
+         asyncValidators: [forbiddenNameValidatorAsync()],
+         updateOn: 'blur'
+    }],
+
+============================================(ngModelChange)="fun()"===============
