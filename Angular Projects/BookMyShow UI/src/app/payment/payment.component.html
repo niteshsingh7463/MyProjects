@@ -1,0 +1,91 @@
+<div class="container-fluid" *ngIf="displayData">
+    <div class="row bg-dark pt-1 pb-3">
+        <div class="col-lg-6 col-md-4 text-left text-white" style="font-size: 25px">
+            <div class="row">
+                <div class="col-lg-1 col-2 pt-2">
+                    <span (click)="backClicked()"><i class="fa fa-chevron-left"></i
+          ></span>
+                </div>
+                <div class="col-lg-11 col-10">
+                    <div class="row">
+                        <span>{{ displayData.title }}</span>
+                    </div>
+                    <div class="row" style="font-size: 15px">
+                        {{ displayData.movieHall }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-4 text-right text-white d-none d-lg-block">
+            <div class="row pt-3">
+                <div class="col" style="font-size: 12px">
+                    <span (click)="backClicked()"><i class="fa fa-times"></i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="background-color: #f5f5fa">
+        <div class="col">
+            <div class="row">
+                <div class="col-lg-8 col-md-4 p-2 m-2" style="background-color: white">
+                    <img alt="bookasmile-03" class="img-fluid" src="https://i.ibb.co/SK0HfNT/bookasmile-03.png" />
+                </div>
+                <div class="col-lg-3 col-md-6" style="background-color: white">
+                    <div class="row">
+                        <div class="col">
+                            <div class="row text-danger mt-1 ml-1">BOOKING SUMMARY</div>
+                            <br />
+                            <!---->
+                            <div class="row ml-2">
+                                <div class="col-6 text-left">Movie Name</div>
+                                <div class="col-6 text-right">{{ displayData.title }}</div>
+                            </div>
+                            <!---->
+                            <div class="row ml-2">
+                                <div class="col-5 text-left">Movie Hall</div>
+                                <div class="col-7 text-right">{{ displayData.movieHall }}</div>
+                            </div>
+                            <!---->
+                            <div class="row ml-2">
+                                <div class="col-6 text-left">Total Tickets</div>
+                                <div class="col-6 text-right">
+                                    {{ displayData.tickets.length }}
+                                </div>
+                            </div>
+                            <div class="row ml-2">
+                                <!---->
+                                <div class="col-6 text-left">Tickets</div>
+                                <div class="col-6 text-right" style="overflow-wrap: break-word">
+                                    {{ displayData.tickets.join(",") }}
+                                </div>
+                            </div>
+                            <div class="row ml-2">
+                                <div class="col-4 text-left">Date</div>
+                                <div class="col-8 text-right">
+                                    {{ currDate.getDate() == displayData.date.slice(0, 2) ? currDate.getDate() + " Today" : displayData.date }}
+                                </div>
+                            </div>
+                            <div class="row ml-2">
+                                <div class="col-6 text-left">Time</div>
+                                <div class="col-6 text-right">{{ displayData.time }}</div>
+                            </div>
+                            <!---->
+                            <div class="row ml-2 pt-2 pb-2" style="background-color: #fffcdc">
+                                <div class="col-6 text-left">Amount Paid</div>
+                                <div class="col-6 text-right">{{ displayData.amount }}</div>
+                            </div>
+                            <div class="row ml-4 text-center">
+                                <img class="img-fluid" src="https://i.ibb.co/CVHYxVK/images-q-tbn-ANd9-Gc-Qq-PT1-GB7-Cpvo3-WDDCi-Wt-Vto-Q-SLqp-Z9-B1x-D3-D69-WTj-MPyl-Chnd.png" style="height: 300px; width: 300px" />
+                            </div>
+                            <div class="row ml-2" style="font-size: 10px">
+                                You can cancel the tickets 4 hour(s) before the show. Refunds will be done according to Cancellation Policy.
+                            </div>
+                        </div>
+                        <br />
+                    </div>
+                </div>
+                <br />
+            </div>
+        </div>
+    </div>
+</div>

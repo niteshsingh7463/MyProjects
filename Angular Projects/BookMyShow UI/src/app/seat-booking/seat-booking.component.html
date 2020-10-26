@@ -1,0 +1,269 @@
+<div class="container-fluid" *ngIf="allData6">
+    <div class="row bg-dark pt-1 pb-3">
+        <div class="col-lg-6 col-md-12 col-sm-12 text-left text-white" style="font-size: 25px">
+            <div class="row">
+                <div class="col-lg-1 col-md-1 col-2 pt-2">
+                    <span (click)="backClicked()"><i class="fa fa-chevron-left"></i
+          ></span>
+                </div>
+                <div class="col-lg-11 col-md-4 col-7">
+                    <div class="row">
+                        <span>{{ allData6.title }}</span>
+                    </div>
+                    <div class="row" style="font-size: 15px">
+                        {{ allData6.showTiming[dayIndex][cinemaHallIndex].name }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 text-right text-white d-none d-lg-block">
+            <div class="row pt-3">
+                <div class="col" style="font-size: 12px">
+                    {{ totalTicketCount }} Tickets &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span (click)="backClicked()"><i class="fa fa-times"></i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row pt-3 pb-3" style="background-color: #f5f5fa; font-size: 12px">
+        <div class="col">
+            <div class="row">
+                <div class="col-lg-6 col-12 ml-1 text-center text-lg-left text-md-left">
+                    {{ dateArr[dayIndex] }}, {{ allData6.showTiming[dayIndex][cinemaHallIndex].timings[timeBtnIndex] .name }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <!----><button class="btn btn-md btn btn-outline-success m-1" style="font-size: 12px" *ngFor="
+              let timeobj of allData6.showTiming[dayIndex][cinemaHallIndex]
+                .timings;
+              index as w
+            " [ngClass]="{ 'timingcss-true': w == timeBtnIndex }" (click)="timeBtn(w)">
+            {{ timeobj.name }}
+          </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row pb-2 ml-4 mr-4 no-gutters">
+        <div class="col text-secondary text-left border-bottom ml-5">
+            RECLINER - Rs 420.00
+        </div>
+    </div>
+    <!---->
+    <div>
+        <!---->
+        <div *ngFor="let seat of upperSeat; index as row1">
+            <div class="row ml-4 mr-4 no-gutters" *ngIf="row1 < 2">
+                <div class="col-1 text-right mr-1">{{ seat.rowName }}</div>
+                <div class="col-10 text-left">
+                    <div style="
+              margin-left: 1;
+              margin-right: 1;
+              margin-top: 1;
+              margin-bottom: 1;
+              float: left;
+              width: 19;
+              height: 19;
+            ">
+                        <!----><button *ngFor="let chair of seat.seatList; index as col1" style="
+                display: inline-block;
+                font-size: 10px;
+                text-align: center;
+                width: 21px;
+                height: 21px;
+                border-radius: 5px;
+                margin-top: 4px;
+                margin-right: 2px;
+                margin-bottom: 4px;
+                margin-left: 2px;
+              " (click)="totalTicket1(row1, col1)" class="{{
+                chair.booked
+                  ? 'btn btn-sm btn btn-outline-secondary-true mr-1 p-1'
+                  : 'btn btn-sm btn btn-outline-secondary-false mr-1 p-1'
+              }}" id="{{ !chair.available ? 'available-false' : 'available-true' }}" [disabled]="!chair.available">
+              <span>{{ chair.seatNo }}</span>
+            </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row pb-2 ml-4 mr-4">
+        <div class="col text-secondary text-left border-bottom ml-5">
+            GOLD - Rs 250.00
+        </div>
+    </div>
+    <!---->
+    <div *ngFor="let seat2 of lowerSeat; index as row2">
+        <div class="row ml-4 mr-4 no-gutters" *ngIf="row2 > 1">
+            <div class="col-1 text-right mr-1">{{ seat2.rowName }}</div>
+            <div class="col-3">
+                <div style="
+            margin-left: 2;
+            margin-right: 2;
+            margin-top: 4;
+            margin-bottom: 4;
+            float: left;
+            width: 21;
+            height: 21;
+          ">
+                    <!------------------------->
+                    <div style="display: inline-block" *ngFor="let seat21 of seat2.seatList; index as q">
+                        <button *ngIf="q < 7" style="
+                display: inline-block;
+                font-size: 10px;
+                text-align: center;
+                width: 21px;
+                height: 21px;
+                border-radius: 5px;
+                margin-top: 4px;
+                margin-right: 2px;
+                margin-bottom: 4px;
+                margin-left: 2px;
+              " (click)="totalTicket2(row2, q)" class="{{
+                seat21.booked
+                  ? 'btn btn-sm btn btn-outline-secondary-true mr-1 p-1'
+                  : 'btn btn-sm btn btn-outline-secondary-false mr-1 p-1'
+              }}" id="{{
+                !seat21.available ? 'available-false' : 'available-true'
+              }}" [disabled]="!seat21.available">
+              {{ seat21.seatNo }}
+            </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div style="
+            margin-left: 2;
+            margin-right: 2;
+            margin-top: 4;
+            margin-bottom: 4;
+            float: left;
+            width: 21;
+            height: 21;
+          ">
+                    <!---->
+
+                    <div style="display: inline-block" *ngFor="let seat21 of seat2.seatList; index as q2">
+                        <button *ngIf="q2 >= 7 && q2 < 18" style="
+                display: inline-block;
+                font-size: 10px;
+                text-align: center;
+                width: 21px;
+                height: 21px;
+                border-radius: 5px;
+                margin-top: 4px;
+                margin-right: 2px;
+                margin-bottom: 4px;
+                margin-left: 2px;
+              " (click)="totalTicket2(row2, q2)" class="{{
+                seat21.booked
+                  ? 'btn btn-sm btn btn-outline-secondary-true mr-1 p-1'
+                  : 'btn btn-sm btn btn-outline-secondary-false mr-1 p-1'
+              }}" id="{{
+                !seat21.available ? 'available-false' : 'available-true'
+              }}" [disabled]="!seat21.available">
+              {{ seat21.seatNo }}
+            </button>
+                    </div>
+                </div>
+            </div>
+            <!-- ================================================================================ -->
+            <div class="col-3">
+                <div style="
+            margin-left: 2;
+            margin-right: 2;
+            margin-top: 4;
+            margin-bottom: 4;
+            float: left;
+            width: 21;
+            height: 21;
+          ">
+                    <!---->
+                    <div style="display: inline-block" *ngFor="let seat21 of seat2.seatList; index as q3">
+                        <button *ngIf="q3 > 17" style="
+                display: inline-block;
+                font-size: 10px;
+                text-align: center;
+                width: 21px;
+                height: 21px;
+                border-radius: 5px;
+                margin-top: 4px;
+                margin-right: 2px;
+                margin-bottom: 4px;
+                margin-left: 2px;
+              " (click)="totalTicket2(row2, q3)" class="{{
+                seat21.booked
+                  ? 'btn btn-sm btn btn-outline-secondary-true mr-1 p-1'
+                  : 'btn btn-sm btn btn-outline-secondary-false mr-1 p-1'
+              }}" id="{{
+                !seat21.available ? 'available-false' : 'available-true'
+              }}" [disabled]="!seat21.available">
+              {{ seat21.seatNo }}
+            </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br /><br />
+    <div class="row">
+        <div class="col text-center">
+            <span><svg
+          xml:space="preserve"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          enable-background="new 0 0 100 100"
+          height="20px"
+          style="fill: rgba(0, 0, 0, 0.6)"
+          version="1.1"
+          viewBox="0 0 260 20"
+          width="260px"
+          x="0px"
+          xmlns="http://www.w3.org/2000/svg"
+          y="0px"
+        >
+          <g fill="none" fill-rule="evenodd" opacity=".3">
+            <g fill="#E1E8F1">
+              <path d="M27.1 0h205.8L260 14.02H0z" id="da"></path>
+            </g>
+            <path
+              d="M27.19.33L1.34 13.7h257.32L232.81.32H27.2z"
+              stroke="#4F91FF"
+              stroke-width=".65"
+            ></path>
+            <path
+              d="M28.16 2.97h203.86l17.95 9.14H10.35z"
+              fill="#8FB9FF"
+            ></path>
+            <g fill="#E3ECFA">
+              <path d="M0 13.88h260l-3.44 6.06H3.44z" id="db"></path>
+            </g>
+            <path
+              d="M.56 14.2l3.07 5.41h252.74l3.07-5.4H.56z"
+              stroke="#4F91FF"
+              stroke-width=".65"
+            ></path>
+          </g>
+        </svg>
+      </span>
+            <br /><span style="font-size: 10 px"><p>All Eyes this way please!</p></span
+      >
+    </div>
+  </div>
+  <!---->
+  <div class="row fixed-bottom" [hidden]="totalTicketCount == 0">
+    <div class="col-4"></div>
+    <div class="col-lg-4 col-6 ml-3 mr-2 text-center">
+      <button
+        class="btn btn-primary btn-block btn-md"
+        (click)="paymentBtn()"
+        routerLink="/payment"
+      >
+        Pay Rs. {{ totalTicketPrice }}
+      </button>
+    </div>
+  </div>
+</div>
