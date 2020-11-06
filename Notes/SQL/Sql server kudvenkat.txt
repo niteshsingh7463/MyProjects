@@ -1,0 +1,48 @@
+create database sb1
+
+alter database db1 modify name=db2
+
+drop database db2
+===========================================================
+-----------------Foreign key Constraint------------------
+Alter table tblPerson add constraint tblPerson_GenderID_FK ------->>this is constraint name.
+Foreign Key (GenderId) reference tblGender(ID)
+
+------------------------------------------------------------
+============================================================
+-------------------Drop Constraint-------------------
+ALTER TABLE TBLPerson
+DROP CONSTRAINT DF_tblPerson_GenderId ------->>this is constraint name.
+============================================================ 
+---------------------Default Constraint---------------------
+ALTER TABLE tblperson
+ADD CONSTRAINT DF_tblperson_GenderId ------->>this is constraint name.
+DEFAULT 3 FOR GENDERID
+=============================================================
+---------Cascading_refrential_integrity-constraint------------
+---->it will delete the all dependent rows as well
+     if foreign key element will be deleted(GenderId) 
+=============================================================
+------------------Check Constraint---------------------
+Alter Table tblPerson
+Add Constraint CK_tblPerson_Age CHECK (Age > 0 AND Age < 150)
+---------->could allow NULL value (expression value will be unknown result)
+
+=============================================================
+-----------------------Identity Column-----------------------
+Create Table tblPerson
+(
+  Personid int identity(1,1){seed,increment}Primary key ---->curly braces content is comment.
+)
+-------------------------------------------------------------
+-----To explicitly supply a value for identity column--------
+===>SET IDENTITY_INSERT tblPerson1 ON
+>off after using
+-------------------------------------------------------------
+--if u have  deleted all the rows & want to reset identity value--
+==>DBCC CHECKIDENT(tblPerson1,RESEED,0)
+
+
+
+
+

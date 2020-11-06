@@ -1,0 +1,12 @@
+------------------------------------Regular Expression-------------------------------------
+sqlservertutorial.net
+-------------------------------------------------------------------------------------------
+.    means "any character".
+
+*    means "any number of this".
+
+.*   therefore means an arbitrary(manmana) string of arbitrary length.
+
+^    indicates the beginning of the string.
+
+$    indicates the end of the string.

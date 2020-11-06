@@ -1,0 +1,17 @@
+transform  //2D,3D animation.
+
+------------------------------------------------------------------------------------
+div.b {
+    white-space: nowrap;
+    width: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis; //...
+}
+-------------------------------------------------------------------------------------
+text-overflow: nowrap;
+color:whitesmoke.
+
+---------------------------------------------------------------------------------------
+.example {
+  overflow-wrap: break-word;
+}

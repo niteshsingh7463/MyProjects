@@ -1,0 +1,17 @@
+ git checkout feature_inprogress_branch
+git checkout -b <new-branch>
+git checkout -b <new-branch> <existing-branch>
+
+
+-----clone a repository------
+$ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
+
+You can set your default editor in Git to use Notepad++ if you have installed the editor.
+Install Notepad++.
+Open TerminalTerminalGit Bashthe terminal.
+Type this command: $ git config --global core.editor "'C:/Program Files (x86)/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin"
+
+
+--------vim------
+i-insert
+esc-:wq---------save and exit

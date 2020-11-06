@@ -1,0 +1,1 @@
+scanf("%[^\n]%*c",sen);---------takes user input sentence

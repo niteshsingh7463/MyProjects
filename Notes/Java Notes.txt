@@ -1,0 +1,1 @@
+syatem.out.printf(-15s)-----------------right justified by 15 spaces

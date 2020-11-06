@@ -1,0 +1,4 @@
+start chrome Task1.html
+mv Practice1.html Task1.html
+rm -r Trainning
+$ cp -R <source_folder> <destination_folder>    //tocopy

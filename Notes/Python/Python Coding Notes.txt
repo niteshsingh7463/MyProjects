@@ -1,0 +1,225 @@
+TARGET==80
+---------------------------------------------Class-----------------------------------------
+def__init__(self):----------__init__ method is used to initialise the attribute of class 
+if existed when object of class is created."Init method is called when object is
+ created(each time)"
+it takes some memory space to work on objects.
+
+
+self---------------self keyword is used to represent objects.
+
+
+----------------------------------------Aaise bhi hota hai---------------------------------
+split('seprator',maxsplit)
+list1.index(item)--------------returns index of passed item
+a, b, c = map(int,input().split())
+arrA = np.array([input().split() for _ in range(a)],int)
+
+print(__import__('numpy').polyval(list(map(float,input().split())),float(input())))
+--------------------------------------------------> direct import numpy in printf.
+
+
+map()-------returns object
+technically map object is iterator so we can iterate loop over it.
+map object par ek hi baar loop chala sakte hai.
+
+.join()
+
+list=[1,2,4,5,6]
+list.count(1)--------------count the occurance of 1 in list.
+
+any()
+
+find() -----return index
+
+isupper()---return boolean value
+
+round(digit,upto decimal place which has to be rounded)
+
+ord()--------character to integer
+
+char()-------integer to character
+
+Euler's totient 
+?(3)=2
+gcd(1,3)is 1 and gcd(2,3) is 1 so no of counts of gcd=1 with n=3 is 2.
+
+Enumerate(iterator,starting index)-----returns list of tuples
+
+.intersection()---------returns the intersection of a set,
+set is immutable to the .intersection() operation (or & operation)
+
+
+set1.issuperset(set2)---------returns boolean values
+
+{0}{1}.format(*input().split()+[''])--------string input ko bhi int ki tarah pass karta hai
+
+import string
+alpha = string.ascii_lowercase----------it gets ---alpha='abcdefghijklmnopqrstuvwxyz'
+
+
+dict.values()----------------returns list of all values of dictionary.
+
+string.capitalize()------------------returns first letter with uppercase.
+
+iter(string)------------------------returns object of string'element seprated one by one. 
+
+mapped = zip(name, roll_no, marks) -----------returns object of tuples with mapped values.
+
+eval('list.{}'.format(n)) where n='sort()'====eval(list.sort())===== sorted list
+
+all(True,True,True)------return True if all the elements are true
+
+import cmath------------module to use complex no.functions and other mathematical computations.
+abs(complex no.),cmath.phase(complex no.)-----------Polar Co-ordinates problem
+
+from itertools import permutations
+permutation(list or string,r length)------------returns tuples all sets of 2 numbers
+
+list(product(A,B))----- returns the same as ((x,y) for x in A for y in B).--cartesian product
+list(combinations(a,4))-----returns combinations of 4 length.
+--------------see---------groupby()----------------
+
+from collections import Counter
+c=Counter(list)------------------returns output as dictionary key as element,value as
+ no. of occurence.#counter({d=3,f=2,a=2})
+
+from collections import namedtuple
+student=collections.namedtuple('student','category_list')-------._make()--is used to take 
+input in namedtuple.
+
+import re
+reg = re.compile(input())----------to find whether given string id regular expression or not.
+re.match(r'^[-+]?[0-9]*\.[0-9]+$', input()))--------matches string with given reg exp.
+
+filter()--------------------returns all true values,
+A filter takes a function returning True or False and applies it to a sequence,
+ returning a list of only those members of the sequence where the function returned True.
+
+dictionary.most_common(3)----------returns list of tuples of 3 most occuring keys of dictionary.
+
+print("\033[A") -----------------move cursor to its previous line
+
+list1.extend(list2)------------------concatenate lists
+
+de = collections.deque([1,2,3])
+appendleft()--This function is used to insert the value in its argument to the left end
+ of deque.
+===========================================================================================
+----------------------------------Numpy---------------------------------------
+import numpy
+
+a = numpy.array([1,2,3,4,5])
+print a[1]          #2
+
+b = numpy.array([1,2,3,4,5],float)-------second argument (float) can be used to set type of element.
+print b[1]          #2.0 
+
+-------------------------------------Shape-------------------------------------------
+import numpy
+
+change_array = numpy.array([1,2,3,4,5,6])
+change_array.shape = (3, 2)
+print change_array      
+
+#Output
+[[1 2]
+[3 4]
+[5 6]]
+
+-----------------------------------Reshape--------------------------------------------
+import numpy
+
+my_array = numpy.array([1,2,3,4,5,6])
+print numpy.reshape(my_array,(3,2))
+
+#Output
+[[1 2]
+[3 4]
+[5 6]]
+----------it creates new array,it does not affect original list or data.
+
+-----------------------------------Concatenate function------------------------------------
+Two or more arrays can be concatenated together using the concatenate function with 
+a tuple of the arrays to be joined:
+import numpy
+
+array_1 = numpy.array([1,2,3])
+array_2 = numpy.array([4,5,6])
+array_3 = numpy.array([7,8,9])
+
+print numpy.concatenate((array_1, array_2, array_3))    
+
+#Output
+[1 2 3 4 5 6 7 8 9]
+
+------------------------------------------------------------------------------------------
+poly
+
+The poly tool returns the coefficients of a polynomial with the given sequence of roots.
+
+print numpy.poly([-1, 1, 1, 10])        #Output : [  1 -11   9  11 -10]
+--------------------------------------------------------------------------------------
+roots
+
+The roots tool returns the roots of a polynomial with the given coefficients.
+
+print numpy.roots([1, 0, -1])           #Output : [-1.  1.]
+------------------------------------------------------------------------------------------
+polyint
+
+The polyint tool returns an antiderivative (indefinite integral) of a polynomial.
+
+print numpy.polyint([1, 1, 1])          #Output : [ 0.33333333  0.5         1.          0.        ]
+------------------------------------------------------------------------------------------
+polyder
+
+The polyder tool returns the derivative of the specified order of a polynomial.
+
+print numpy.polyder([1, 1, 1, 1])       #Output : [3 2 1]
+------------------------------------------------------------------------------------------
+polyval
+
+The polyval tool evaluates the polynomial at specific value.
+
+print numpy.polyval([1, -2, 0, 2], 4)   #Output : 34
+-------------------------------------------------------------------------------------------
+polyfit
+
+The polyfit tool fits a polynomial of a specified order to a set of data using a least-squares approach.
+
+print numpy.polyfit([0,1,-1, 2, -2], [0,1,1, 4, 4], 2)
+
+#Output : [  1.00000000e+00   0.00000000e+00  -3.97205465e-16]
+
+The functions polyadd, polysub, polymul, and polydiv also handle
+ proper addition, subtraction, multiplication, and division of 
+polynomial coefficients, respectively.
+------------------------------------------------------------------------------------------
+-------------------------------------------Min or Max--------------------------------------------
+import numpy
+
+my_array = numpy.array([[2, 5], 
+                        [3, 7],
+                        [1, 3],
+                        [4, 0]])
+
+print numpy.min(my_array, axis = 0)         #Output : [1 0]
+print numpy.min(my_array, axis = 1)         #Output : [2 3 1 0]
+print numpy.min(my_array, axis = None)      #Output : 0
+print numpy.min(my_array)                   #Output : 0
+------------------------------------------inner or outer-------------------------------------------------
+inner
+
+The inner tool returns the inner product of two arrays.
+
+import numpy
+
+A = numpy.array([0, 1])
+B = numpy.array([3, 4])
+
+print numpy.inner(A, B)     #Output : 4
+-----------------------------------------------------------------------------------------------------------
+numpy.sum
+numpy.prod
+-----------------------------------------------------------------------------------------------------------

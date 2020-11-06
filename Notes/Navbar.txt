@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand bg-dark navbar-dark">
+    <a class="navbar-brand text-white">BookSite</a>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a routerLink="/books" [queryParams]="{ newarrival: 'yes' }" class="nav-link">New Arrivals</a
+        >
+      </li>
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="navbarDropdown"
+          role="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Book by Genre
+        </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" routerLink="/books/fiction">Fiction</a>
+                    <a class="dropdown-item" routerLink="/books/children">Children</a>
+
+                    <a class="dropdown-item" routerLink="/books/mystery">Mystery</a>
+                    <a class="dropdown-item" routerLink="/books/management">Management</a>
+                    <a class="dropdown-item" routerLink="/books/self help">Self Help</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a routerLink="/books" class="nav-link">All Books</a>
+            </li>
+        </ul>
+    </div>
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a href="" class="nav-link">LOGIN</a>
+        </li>
+    </ul>
+</nav>

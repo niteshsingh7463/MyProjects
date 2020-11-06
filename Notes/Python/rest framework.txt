@@ -1,0 +1,7 @@
+Restapp
+Products
+pip install djangorestframework
+settings.py-->installed apps-->'rest_framework','Products'
+python manage.py migrate
+
+Products-->models.py-->

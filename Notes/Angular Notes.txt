@@ -1,0 +1,343 @@
+=============================================ngrok========================================
+
+ngrok http -host-header=rewrite http://localhost:4200/
+
+====================================installing new project================================
+npm install -g @angular/cli@7.2.0
+ng new appname
+ng serve
+ng serve --open
+ng serve --port 4500   ==> (to run on targeted port)
+=====================================installing Bootstrap==================================
+1>>Go to vs code and open your project. In the project go to Terminal and open new terminal.
+
+2>> Install bootstrap using command npm install --save @ng-bootstrap/ng-bootstrap@4.0.0
+
+3>>Add following marked lines in app.module.ts
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+then in imports==>>
+NgbModule
+
+4>>Go to root style.css and add following lines.
+@import 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css';
+
+---------------------------------Steps after bootstrap installation---------------------------
+
+1>>Go to app.module.ts and write following marked line.
+==>>import {FormsModule} from '@angular/forms';
+
+2>>In app.module.ts in imports write the line which is marked below.
+==>>FormsModule
+
+3>> In settings json file add.
+==>>"editor.deffaultFormatter":"esbenp.prettier-vscode",
+	"editor.formatOnSave":true
+
+=========================================ServerSportStar=======================================
+The steps to run the server have been provided below:
+
+Go the folder which has package.json
+• Copy the file serverSportStar.js in that folder
+• Install express by running the command
+    npm install express --save
+• Run the command (you might need to press enter twice after running the command)
+    npm init
+• Run the command (it will display a message - The server is running on port 2410.)
+   node serverSportStar.js
+============================================[(ngModel)]=========================================
+
+ <input type="text" class="form-control" [(ngModel)]="course" /> 
+
+ngModel is a directive which binds input, select and textarea, 
+and stores the required user value in a variable and we can use that variable whenever
+ we require that value.
+ It also is used during validations in a form.
+
+=============================================*ngFor==============================================
+<div *ngFor="let c1 of cities">{{ c1 }}</div>
+<--------------------------------------------------------------------->
+<div *ngFor="let c1 of cities; index as i">
+        {{ c1 }}<span class="fa fa-trash" (click)="remove(i)"></span>
+    </div>
+<---------------------------------------------------------------------->
+
+============================================*ngIf=================================================
+ <p *ngIf="check">
+        This content is visible only when checktrue
+ </p>
+
+==============================================Nav==================================================
+<nav class="navbar navbar-expand navbar-dark bg-primary">
+        <a class="navbar-brand" routerLink="/">EDUFECT</a>
+
+        <div class="collapse navbar-collapse mr-auto">
+            <ul class="navbar-nav">
+                <li class="nav-item" *ngFor="let l1 of navlinks">
+                    <a class="nav-link" routerLink="{{ l1.link }}" routerLinkActive="{{ l1.active }}">{{ l1.txt }}</a
+          >
+        </li>
+      </ul>
+    </div>
+  </nav>
+=============================================HttpClientModule========================================
+
+import { HttpClientModule } from '@angular/common/http';  ====> in 'app-module.ts'.
+
+============================================updateOn=========================================================
+  firstName: ['initial value',{
+         validators: [Validators.required, Validators.minLength(2), forbiddenNameValidator(/bob/i)],
+         asyncValidators: [forbiddenNameValidatorAsync()],
+         updateOn: 'blur'
+    }],
+
+============================================(ngModelChange)="fun()"===============
+work after [ngModel] so you can get updated Value.
+
+=========================Lazy Loading==================================
+{path: 'admin', loadChildren:() => AdminModule }
+============================================CORS Error=========================================================
+[In Development Mode: CORS Error will be thrown by browserbecause we are working between
+ two servers (localhost and the basurl server)To avoid this error disable the browser check.
+ Close all browser windows and quit Chrome completely. Then launch it from command line as follows:
+Windows:
+	start chrome --user-data-dir="C://Chrome dev session" --disable-web-security
+
+Linux:
+	google-chrome --disable-web-security.
+
+https://expressjs.com/en/resources/middleware/cors.html  ===>install cors
+=============>npm install cors
+and Add this in serverFile::
+	var express = require("express");
+	var app = express();
+	app.use(express.json());
+	var cors = require("cors");
+	app.use(cors());
+
+========================================================================================
+https://www.youtube.com/watch?v=Oo0-r_YhoJs     =====>Template reference Variable
+====================================Dom Maniplation================================
+<div class="col-md-12" id="demo" #demo>
+   ...
+   <td>
+    <i class="material-icons text-primary pointer" (click)="details(demo)">account_circle</i>
+   </td>
+   ...
+</div>
+
+
+details(elem: HTMLElement) {
+  console.log(elem.className, 'before');
+  elem.className = 'col-md-6';
+  console.log(elem.className, 'after');
+}
+====================================================Angular Guards=====================
+first do guards function then do return url in login component
+============================================(keyup.enter)="onEnter()====================
+
+  onEnter() {
+    this._router.navigate([], {
+      relativeTo: this._route,
+      queryParams: {
+        q: this.searchVar
+      },
+      queryParamsHandling: 'merge',
+      // preserve the existing query params in the route
+      // skipLocationChange: true
+      // do not trigger navigation
+    });
+
+
+=======================================================================================
+
+
+======================================Reactive Forms=================================================
+this.simpleForm.get('name').setValue('nitesh');  ==>sets name control value to nitesh
+=======================================================================================
+=======================================Host on Firebase================================
+On Angular 7::=>
+
+=====>	npm install -g firebase-tools
+
+=====>	firebase login
+
+=====>	firebase init
+	
+	database + Hosting.
+
+	Which Firebase CLI features do you want to set up for this folder?
+	Press space to select required feature then enters to confirm your choices.
+	Select a default Firebase project for this directory:
+	Select whichever app you have created.
+	What file should be used for Database Rules? (database.rules.json)
+	Press enter to continue with database.rules.json
+	What do you want to use as your public directory?
+	 (public) dist/your-project-name
+	This is a very important step, Angular creates 	
+	the dist/your-project-name folder where all your compiled files go. 
+	To get your project name go to your-project-folder > package.json file, 
+	copy your app name like mentioned in the screenshot below.
+------------------------------------------------------------------------------------
+	Angular provides 2 ways to compile your Angular app.
+
+	Just-in-Time: JIT compiles your app in the browser at runtime, It’s a default compilation process.
+	Ahead-of-Time: AOT compiles your app at build time, Best used for Production Build.
+	Let’s create production build using AOT compilation.
+======> ng build --prod --aot
+======>	firebase deploy
+
+
+reference::
+   https://www.positronx.io/deploy-angular-app-to-production-with-firebase-hosting/
+=======================================================================================
+At the top add the lineconst functions = require("firebase-functions");Replace the line app.listen(port, () => console.log("Listening on port : ", port));with exports.app = functions.https.onRequest(app);
+=======================================================================================
+// ===================================CSV to JSON============================================
+const csvFilePath = "./SalesJan2009.csv";
+const csv = require("csvtojson");
+let jsonData;
+csv()
+    .fromFile(csvFilePath)
+    .then((jsonObj) => {
+        jsonData = jsonObj;
+        console.log(jsonData);
+    });
+// ===================================================================================
+
+==========================================Mysql Connection(B1#6A)=============================================
+//Create connection
+const mysql = require('mysql');
+const db = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'ca1903',
+    // database: 'test',
+});
+
+//Connect
+db.connect((err) => {
+    if (err) {
+        console.log(err);
+    }
+    console.log('MySql Connected');
+});
+
+===========================================SQL Query(B1#6A)============================================
+// =============================create table========================
+
+app.get('/createtable', (req, res) => {
+    let sql =
+        'CREATE table csvtojsontbl(Transaction_date varchar(20),Product varchar(20),Price integer,Payment_Type varchar(20),Name varchar(20),City varchar(20),State varchar(20),Country varchar(20),Account_Created varchar(20),last_login varchar(20),lattitude varchar(30),longitude varchar(30))';
+    // let sql = 'show tables';
+    db.query(sql, (err, result) => {
+        if (err) {
+            console.log(err);
+        }
+        console.log(result);
+        res.send('csvtojsontbl created....');
+    });
+});
+// =============================insert table========================
+
+app.get('/inserttable', (req, res) => {
+    let sql = 'insert into csvtojsontbl set ?';
+
+    for (let i = 0; i < jsonData.length; i++) {
+        db.query(sql, jsonData[i], (err, result) => {
+            if (err) {
+                console.log(err);
+            }
+            console.log(result);
+        });
+    }
+    res.send('data inserted....');
+});
+
+
+=========================================CSV to JSON==============================================
+
+// ===============================================================================
+// const csvFilePath = './SalesJan2009.csv';
+// const csv = require('csvtojson');
+// let jsonData;
+// csv()
+//     .fromFile(csvFilePath)
+//     .then((jsonObj) => {
+//         jsonData = jsonObj;
+//         console.log(jsonData);
+//     });
+//
+ =======================================Subject and Observable=========================
+
+  private loginStatusObs = new Subject<boolean>();
+  private loginStatusObs$ = this.loginStatusObs.asObservable();
+
+topbarBoolFun() {
+    this.topbarBool = false;
+    this.loginStatusObs.next(this.topbarBool);
+  }
+===========================================Dynamic Css============================================
+1::>>  	[ngClass]="{'primary':isPrimary}"
+2::>>	[class.glyphicon-star]="isFavourite"
+============================================Dynamic ID===========================================
+<a href ng-attr-id="{{expresion ? 'this-one': ''}}">Anchor</a>
+==========================================Go Back to Last Page=======================================================
+import {Component} from '@angular/core';
+import {Location} from '@angular/common';
+
+@Component({
+  // component's declarations here
+})
+class SomeComponent {
+
+  constructor(private _location: Location) 
+  {}
+
+  backClicked() {
+    this._location.back();
+  }
+}
+=============================================Subject & Observables====================================================
+
+
+import {Observable,Subject} from 'rxjs';
+
+private loginStatusObs = new Subject<boolean>();
+private loginStatusObs$ = this.loginStatusObs.asObservable();
+
+------------Into function body-----------
+this.loginStatusObs.next(this.loginStatus);
+
+----------At Page where it is needed---------
+this.authservice.loginStatusObs$.subscribe(status=>{console.log("Subscribe::"+status);})
+
+
+===========================Dynamic Value of key in JSON======================================================================
+var mysort = {[var]:1}
+=================================================================================================
+
+=================================================================================================
+
+=================================================================================================
+=================================================================================================
+=================================================================================================
+=================================================================================================
+=================================================================================================
+=================================================================================================
+=================================================================================================
+=================================================================================================
+=================================================================================================
+=================================================================================================
+=================================================================================================
+=================================================================================================
+=================================================================================================
+=================================================================================================
+=================================================================================================
+=================================================================================================
+=================================================================================================
+=================================================================================================
+=================================================================================================
+=================================================================================================
+=================================================================================================
+=================================================================================================

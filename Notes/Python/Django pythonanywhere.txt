@@ -1,0 +1,60 @@
+myenv\scriptss\activate  ------to create virtual enviornment
+
+pip freeze > requirements.txt
+
+zip the file
+
+upload on pythonanywhere
+
+--------on bash console of pythonanywhere---------
+
+mkvirtualenv django20 --python=/usr/bin/python3.7
+
+unzip projectfile.zip
+
+--------go to web section------
+add a new web app
+manual config
+python 3.7
+
+virtual env section
+dir of virtual env (/home/niteshsingh7463/.virtualenvs/django20)
+
+goto project directory
+pip install -r requirement.txt
+
+-------goto wsgi file (in web section)----------
+delete helloworld to django
+
+--uncomment-- 
+import os
+import sys
+
+path='/home....'  (folder path must be correct)
+if path...
+  sys.path... 
+os.environ['dja...']='...'    (settings.py path must be correct)
+from django.core....
+application=get_wsgi...
+
+------------goto settings.py-----------
+ALLOWED_HOSTS=['*']
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = (os.path.join(BASE_DIR,'static'),)
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+------on bash console------
+python manage.py collectstatic ----
+-----(it will create static folder and collect all static files in it)
+
+-------go to web section-------
+set static files
+
+URL=/static/
+Directory='copy the staticfiles folder directory'
+
+
+
+
+

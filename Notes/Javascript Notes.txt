@@ -1,0 +1,365 @@
+
+
+
+--------------javascript is a case sensitive langauge.----------------
+
+Number(secondInteger);   ---------to convert to Number.
+
+firstString.concat(secondString); -------to concatnate a string to another string.
+
+let -------limited to block.
+var -------can be used globally or over function body.
+can be accessed outside function.
+
+------------------------------------------------------------------
+ try
+   {    
+       PI = 0;
+       console.log(PI);
+    } 
+catch(error) 
+  {
+     console.error("You correctly declared 'PI' as a constant.");
+  }
+-------------------------------------------------------------------
+
+// Storing number, boolean, strings in an Array 
+var house = ["1BHK", 25000, "2BHK", 50000, "Rent", true]; 
+
+var house = new Array(10, 20, 30, 40, 50);
+
+-----------------------------------------------------------------------
+
+for(let v of s) -----------looping through each element of string s.
+if(!vowels.includes(v))-------does v is in not vowels.
+
+==============================Regular Expression=======================
+
+function regexVar(str) {
+//  ^ => first item matches:
+// () => stores matching value captured within
+// [aeiou] => matches any of the characters in the brackets
+// . => matches any character:
+// + => for 1 or more occurrances (this ensures str length > 3)
+// \1 => matches to previously stored match. 
+// \2 looks for matched item stored 2 instances ago 
+// \3 looks for matched item stored 3 ago, etc
+// \. => putting backslash before . will take it as string. 
+//  $ ensures that matched item is at end of the sequence
+
+    let re = /^([aeiou]).+\1$/;
+    return re;
+}
+
+----------------------------Example-------------------------------------
+
+const re = /^(Mr|Mrs|Dr|Er)(\.)[a-zA-Z]+$/
+
+============================Try and Catch==================================
+
+function reverseString(s) {
+  
+  try{
+    // Can be chained, but it damages readability
+    console.log(s.split("").reverse().join("")) 
+  }
+  catch(e){
+    console.log(e.message); // Use .message, or you'll get more than expected.
+    console.log(s);
+  }
+
+}
+
+==========================================================================
+====Throw===== 
+
+function isPositive(a) {
+    if (a == 0)
+        throw Error('Zero Error');
+    if (a < 0)
+        throw Error('Negative Error');
+    
+    return 'YES';
+}
+
+==================super()=====================
+
+In a child class, you use super() to call its parent’s constructor 
+and super.<methodName> to access its parent’s methods. 
+
+class Rectangle {
+    constructor(w, h) {
+        this.w = w;
+        this.h = h;
+    }
+}
+   Rectangle.prototype.area = function() {
+        return this.w*this.h;
+    };
+/*
+ * Create a Square class that inherits from Rectangle and implement its class constructor
+ */
+   
+    class Square extends Rectangle {
+        constructor(s) {
+            super(s);
+            this.h = s;
+            this.w = s;
+        }
+    };
+=======================================================================
+
+=========user input============
+var name = widow.prompt("enter your Name")
+
+========================================================================
+My answer:
+
+function Rectangle(a, b) {
+  this.length = a;
+  this.width = b;
+  this.area = a * b;
+  this.perimeter = 2 * (a + b);
+}
+or with ES6 (but without usage of defined code in problem):
+
+class Rectangle {
+  constructor(a, b) {
+    this.length = a;
+    this.width = b;
+    this.area = a * b;
+    this.perimeter = 2 * (a + b);
+  }
+}
+===========================counting objects=====================================
+objects stores/take values in key value pairs.
+
+const getCount = objects => objects.filter(item => item.x==item.y).length;
+
+function getCount(objects){return objects.filter(obj=>obj.x==obj.y).length;}
+
+===============================reduce()==================================
+reduce() iterates over array. 
+class Polygon{
+    constructor(a){
+        this.a=a
+    }
+   
+perimeter() {
+     return this.sides.reduce((total, side) => total + side);
+} }
+
+================================Template literals===========================
+
+function sides(literals, ...expressions) {
+    // ES6 allows destructuring of arrays into multiple variables
+    const [a, p] = expressions;
+    // Perform this operation only once and assign to variable
+    const root = Math.sqrt((p*p)-(16*a))
+    const s1 = (p + root)/4;
+    const s2 = (p - root)/4;
+    // s2 will always be smaller because of the (-/+) above
+    return ([s2, s1]);
+}
+
+=======================================map()=============================
+
+const modifyArray=nums=> nums.map(a=>a%2==0?a*2:a*3);
+------------>nums is iterator here.map() iterates over nums.
+
+
+==================================Create Button===========================
+---------------------javascript--------------------------
+var btn = document.createElement("Button");
+
+btn.innerHTML = "0";
+btn.id = "btn";
+document.body.appendChild(btn);-->appendChild(id) is uased to
+                                      append created button.
+
+btn.onclick = function() {
+    btn.innerHTML++;
+}
+--------------------------------------------------------
+HTML
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Button</title>
+        <link rel="stylesheet" href="css/button.css" type="text/css">
+    </head>
+
+    <body>
+        <script src="js/button.js" type="text/javascript"></script>
+    </body>
+</html>
+--------------------------------------------------------
+CSS
+#btn {
+    width: 96px;
+    height: 48px;
+    font-size: 24px;
+}
+==========================================================================
+
+Note that a string can be converted into anumber as follows:
+ var s1 = "47";var n1 = +s1;// the +s1 converts the string s1 into a number
+var n2 = s1+2;
+The value of n2 will be 49 as n1 has become the number 47 because of the use 
+of the + operator.
+
+============================================================================
+
+typeof(variable name); //to know datatype
+
+document.getElementbyId("idname");
+var ele = document.createElement("div");
+document.body.appendChild(ele);
+ele1 = document.getElementbyId("1");
+ele1.appendChild("div")  >>>>>>>No need to write document again. 
+##########>>>>>document sirf ek baar hi use karna chahiye
+[A Document object represents the HTML document that is displayed in that window. 
+The Document object has various properties that refer to other
+ objects which allow access to and modification of document content]
+===============================================================================
+str = "Edufect";
+str.charAt(2)>>u>>>>>>>>>>>>>>>string indexing.
+isNan(number)-->>>>>>check is the given number is Not a Number.
+string.toUpperCase()
+string.toLowerCase()
+string.substring(starting index,End index);
+JASON.stringify(p1); -->>>>convert jason object in string form.
+arr.splice(startindex, parametertodelete,valuetoinsert);
+arr.unshift(value);-->>insert the value at top.
+
+element.className = "";
+element.setAttribute("onclick","add()");
+
+arr.filter(word => word.length > 2);
+arr.filter(p2 => pstart(p2,param));======>>>>>passing a parameter in filter method.
+arr.find(); >>>>>undefined    if not found
+arr.findIndex();   >>>>>>>>>>-1;if not found
+
+arr.sort((a,b) => b-a);----->>to sort array of Numbers.
+arr.sort(function(a,b){return b-a})
+arr.sort((a, b) => com(a, b, ch));
+============================sort method=========================
+
+ result = result.sort(function compare(n1, n2) {
+
+         let a = n1[p]
+         let b = n2[p]
+         console.log('values::', a, b)
+         if (a > b) { return 1; }
+         if (a == b) { return 0; }
+         if (a < b) { return -1; }
+
+        })
+
+============================sort method============================
+emps.reduce((acc,curr) => acc+curr.age,0)----------->>>>0 is assigned as initial value to acc.
+emps.reduce((acc,curr) => fnDept(acc,curr,dept1),0)-
+
+map(valeOneByOne,Counting,fullArray)
+var namescopy = [...names];  //spread operator.
+function show(...rest){}   //Rest parameter.====stores all values in a array.
+
+  var txt1 = document.createTextNode(arr1[i]);
+<option disabled selected>--Select Payment Option--</option>
+=========================================================================================
+function getRndInteger(min, max) {
+  return Math.floor(Math.random() * (max - min) ) + min;
+}
+
+Math.floor(Math.random() * 11);      // returns a random integer from 0 to 10
+
+==========================================================================================
+var myVar = setInterval(myTimer, 1000);   //after 1000ms mytimer() will run.
+
+function myTimer() {
+  var d = new Date();
+  var t = d.toLocaleTimeString();
+  document.getElementById("demo").innerHTML = t;
+}
+
+function myStopFunction() {
+  clearInterval(myVar);
+}
+
+-----------------------------------------------------------------------------
+<button onclick="setTimeout(myFunction, 3000)">Try it</button>
+
+//////The second parameter indicates the number of milliseconds before execution.
+
+<script>
+function myFunction() {
+  alert('Hello');
+}
+</script>
+=============================================================================
+var day = new Date('Apr 30, 2000');
+console.log(day); // Apr 30 2000
+
+var nextDay = new Date(day);
+nextDay.setDate(day.getDate() + 1);
+console.log(nextDay); // May 01 2000 
+===================================EventListener==========================================
+    document.body.addEventListener('keydown', function(event) 
+                                       { 
+            const key = event.key; 
+            switch (key) { 
+                case "ArrowLeft": 
+                    str = 'Left'; 
+                    break; 
+                case "ArrowRight": 
+                    str = 'Right'; 
+                    break; 
+                case "ArrowUp": 
+                    str = 'Up'; 
+                    break; 
+                case "ArrowDown": 
+                    str = 'Down'; 
+                    break; 
+            } 
+
+
+============================================================================================
+div {
+  word-wrap: break-word;
+}
+==========================================================================================
+ <style>
+        * {
+            box-sizing: border-box;
+        }
+        /* Create two equal columns that floats next to each other */
+        
+        .row {
+            padding: 3px;
+        }
+        
+        .column {
+            float: left;
+            width: 25%;
+            /* padding: 5px; */
+            height: 20px;
+            /* Should be removed. Only for demonstration */
+        }
+        /* Clear floats after the columns */
+        
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+===============================================================================================
+for sorting stringwise order::::::
+
+p1.name.localeCompare(p2.name)
+
+===============================================================================================
+==============================vertically align a image in div==================================
+"<div class='col-5' style='position:relative'><img style='max-width: 90%;position:absolute;top:0;bottom:0;left:0;right:0;margin:auto;'  src='" + n1.image + "'></div>";
+===========================================================================================

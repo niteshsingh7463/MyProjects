@@ -1,0 +1,36 @@
+======================================================================
+for killing a process by name
+----------------------------------------------------------------------
+import psutil
+
+PROCNAME = "python.exe"
+
+for proc in psutil.process_iter():
+    # check whether the process name matches
+    if proc.name() == PROCNAME:
+        proc.kill()
+======================================================================
+======================================================================
+
+Open a browser in by python
+---------------------------------------------------------------------- 
+import webbrowser
+webbrowser.open('http://net-informations.com', new=2)
+
+If new is 0, the url is opened in the same browser window if possible. 
+If new is 1, a new browser window is opened if possible. If new is 2,
+ a new browser page ("tab") is opened if possible.
+
+======================================================================
+======================================================================
+
+open a program in python
+----------------------------------------------------------------------
+import subprocess
+subprocess.call('C:\\myprogram.exe')
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+import os
+os.startfile('C:\\myprogram.exe')
+=======================================================================
+=======================================================================

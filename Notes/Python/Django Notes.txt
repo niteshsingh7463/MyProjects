@@ -1,0 +1,5 @@
+1.django-admin------it is a utility which takes several commands like startproject.
+2.django-admin startproject 'projectname'----------------inverted comma nahi hai iski jagah
+project ka naam likhna hai.
+3.manage.py--------command line utility hai,which helps to interact with project.
+4.python manage.py runserver
